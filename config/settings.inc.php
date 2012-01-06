@@ -1,7 +1,10 @@
 <?php
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 65fdeeae161b5d29eb9f32932f48ecdc47d0a3ad
 define('__PS_BASE_URI__', '/exeBIPdev/');
 define('_MEDIA_SERVER_1_', '');
 define('_MEDIA_SERVER_2_', '');

@@ -28,7 +28,7 @@ $trs_tasa_interes_max = $_POST['TBK_TASA_INTERES_MAX'];
 
  if($trs_respuesta==0)
 { 
-//**** validacion de mac ****/***cambiar aqu√≠ por su direcci√≥n en el servidor
+//**** validacion de mac ****/***cambiar aquÌ por su direcciÛn en el servidor
   
     $temporal = "temporal.txt";
     if($fp = fopen($temporal, "w"))
@@ -46,11 +46,11 @@ $trs_tasa_interes_max = $_POST['TBK_TASA_INTERES_MAX'];
        fwrite($fp,"$key=$val&");
       }
 	 fclose($fp); 
-     /* 2.- Invocar a tbk_check_mac (Que en realidad no es una cgi) usando como par√°metro el archivo generado */
+     /* 2.- Invocar a tbk_check_mac (Que en realidad no es una cgi) usando como par·metro el archivo generado */
     $cmdline = "/cgi-bin/tbk_check_mac.cgi $filename";
     exec($cmdline,$result,$retint); 
-    /*Si $result[0]="CORRECTO" , entonces mac v√°lido*/
-    if($result[0]="CORRECTO")
+    /*Si $result[0]="CORRECTO" , entonces mac v·lido*/
+    if($result[0]=="CORRECTO")
      { 
 	  echo "ACEPTADO";
       /**** Comprobacion de Orden de Compra ****/

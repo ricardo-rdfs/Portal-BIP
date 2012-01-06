@@ -10,13 +10,16 @@
 <h3>Pago por Webpay</h3>
 
 <form action="{$urlBase}cgi-bin/tbk_bp_pago.cgi" method="post">
-    <INPUT TYPE="hidden" NAME="TBK_MONTO" VALUE="{$total}00">
+    <INPUT TYPE="hidden" NAME="TBK_MONTO" ID="TBK_MONTO" VALUE="{convertPrice price=$total}00">
     <INPUT TYPE="hidden" NAME="TBK_TIPO_TRANSACCION" VALUE="TR_NORMAL">
     <INPUT TYPE="hidden" NAME="TBK_ORDEN_COMPRA" VALUE="OC_{$transaccionId}">
     <INPUT TYPE="hidden" NAME="TBK_ID_SESION" VALUE="OC_{$transaccionId}">
     <INPUT TYPE="hidden" NAME="TBK_URL_EXITO" SIZE="40" VALUE="{$urlBase}modules/blockwebpay/transaccionOk.php" SIZE="2000">
     <INPUT TYPE="hidden" NAME="TBK_URL_FRACASO" SIZE="40" VALUE="{$urlBase}modules/blockwebpay/transaccionKo.php" SIZE="2000">
-    
+    <script language="Javascript">
+		var valor = document.getElementById("TBK_MONTO").value;
+		document.getElementById("TBK_MONTO").value = valor.replace(",","").replace(".","").replace(" ","").replace("$","");
+	</script>
     
 	<p>
 		<img src="{$urlBase}modules/blockwebpay/web-pay-adq.gif" alt="Pago con Webpay" style="float:left; margin: 0px 10px 5px 0px;" />
