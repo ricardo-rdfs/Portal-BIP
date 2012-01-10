@@ -43,7 +43,7 @@ P/N # {$product.reference} <BR>
 					<li class="lista_atributo">{$feature.value|escape:'htmlall':'UTF-8'}</li>
 					{/if}
 				{/foreach}
-                <p class="encontraste"><a class="encontraste_link" href="#">Encontraste este producto m&aacute;s barato, &iquest;D&oacute;nde?</a></p>
+                <p class="encontraste"><a class="encontraste_link" href="modules/comparadordeprecios/comparadordeprecios-form.php?id_product={$product.id_product|intval}">Encontraste este producto m&aacute;s barato, &iquest;D&oacute;nde?</a></p>
                 </ul>
 				{/if}
 			</div>																				 

@@ -34,7 +34,13 @@ $query = "	SELECT cp.*, pl.name name, vpp.internet
 			if(isset($_POST["orderByHidden"])){
 				$query.=" ".$_POST["orderByHidden"];
 			}
-
+			if(isset($_POST["theDate1"])&& strlen($_POST["theDate1"])>0 && isset($_POST["theDate2"])&& strlen($_POST["theDate2"])>0 ){
+				$query.= " AND DATE(dacoFecha) BETWEEN str_to_date('".$_POST["theDate1"]."','%e/%m/%Y') AND str_to_date( '".$_POST["theDate2"]."','%e/%m/%Y') ";
+			}elseif((isset($_POST["theDate1"])&& strlen($_POST["theDate1"])>0) || (isset($_POST["theDate2"])&& strlen($_POST["theDate2"])>0)){
+				?><SCRIPT LANGUAGE="javascript">alert('Para hacer una búsqueda por fecha, debe seleccionar ambas fechas'); </SCRIPT> 
+				  <SCRIPT LANGUAGE="javascript">location.href = "adminComparador.php"; </SCRIPT>
+				<?php
+			}
 $resultLineas = Db::getInstance()->ExecuteS($query);
 
 function ascODesc($orderBy,$ascDesc){
@@ -58,6 +64,8 @@ function orderBy($orderBy,$orderPost){
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link type="text/css" rel="stylesheet" href="'._PS_JS_DIR_.'jquery/datepicker/datepicker.css" />
 <title>Comparador</title>
+<link type="text/css" rel="stylesheet" href="dhtmlgoodies_calendar/dhtmlgoodies_calendar.css" media="screen"></LINK>
+<SCRIPT type="text/javascript" src="./dhtmlgoodies_calendar/dhtmlgoodies_calendar.js"></script>
 <script language="javascript" type="text/javascript">
 function calculaLargo() { 
 	var elLargo=document.body.scrollHeight;
@@ -230,10 +238,16 @@ select.filtros {
 <form action="adminComparador.php" enctype="multipart/form-data" autocomplete="off" id="buscarForm" name="buscarForm" method="post">
   <input type="hidden" id="orderByHidden" name="orderByHidden" value="<?php echo $orderBy; ?>"/>
   <table cellpadding="0" cellspacing="0" style="font-family: Arial, Helvetica, sans-serif; font-size:11px; color:#060; background-color:#FFFFFF; width:100%; height:35px;">
-    <tr>
-      <td width="200">Se han encontrado <?php echo sizeof($resultLineas); ?> registros.</td>
-      <td ></td>
-      <td width="30">Tienda: </td>
+    </tr>
+       <td width="31">Desde</td>
+     <td width="121"><input type="text" readonly="readonly" id="theDate1" name="theDate1" size="15" class="texto2" value="<?php echo (isset($_POST["theDate1"])?$_POST["theDate1"]:''); ?>"/> <script language="javascript"> if(document.getElementById("theDate1").value==""){ document.getElementById("theDate1").value = obtenerFechaActual();}</script>
+         <a href="#" onClick="displayCalendar(document.forms[0].theDate1,'dd/mm/yyyy',this)"><img src="dhtmlgoodies_calendar/imagenes/dtpick.gif" alt="Buscar Fecha" border="0" /></a></td>
+      <td width="8"></td>
+      <td width="57">Hasta</td>
+<td width="96"><input type="text" readonly="readonly" id="theDate2" name="theDate2" size="15" class="texto2" value="<?php echo (isset($_POST["theDate2"])?$_POST["theDate2"]:''); ?>"/> <script language="javascript"> if(document.getElementById("theDate2").value==""){ document.getElementById("theDate2").value = obtenerFechaActual();}</script>
+         <a href="#" onClick="displayCalendar(document.forms[0].theDate2,'dd/mm/yyyy',this)"><img src="dhtmlgoodies_calendar/imagenes/dtpick.gif" alt="Buscar Fecha" border="0" /></a></td>
+      <td width="60"></td>
+      <td width="38">Tienda: </td>
       <td width="100"><select name="tienda" id="tienda" class="filtros">
           <option value="" <?php echo (!isset($_POST["tienda"]))?'selected':''; ?>> Todas </option>
           <option value=".corona" <?php echo (isset($_POST["tienda"]) && $_POST["tienda"]=='.corona')?'selected':''; ?>> Corona </option>
@@ -244,14 +258,14 @@ select.filtros {
           <option value=".wei" <?php echo (isset($_POST["tienda"]) && $_POST["tienda"]=='.wei')?'selected':''; ?>> WEI</option>
         </select></td>
       <td width="10"></td>
-      <td width="35">Relaci&oacute;n: </td>
+      <td width="47">Relaci&oacute;n: </td>
       <td width="100"><select name="relacion" id="relacion" class="filtros">
           <option value="" <?php echo (!isset($_POST["relacion"]))?'selected':''; ?>> Todos </option>
           <option value="Idéntico" <?php echo (isset($_POST["relacion"]) && $_POST["relacion"]=='Idéntico')?'selected':''; ?>> Similar </option>
           <option value="Similar" <?php echo (isset($_POST["relacion"]) && $_POST["relacion"]=='Similar')?'selected':''; ?>> Id&eacute;ntico </option>
         </select></td>
       <td width="10"></td>
-      <td width="35">V&aacute;lidos: </td>
+      <td width="42">V&aacute;lidos: </td>
       <td width="100"><select name="porvalidar" id="porvalidar" class="filtros">
           <option value="" <?php echo (!isset($_POST["porvalidar"]))?'selected':''; ?>> Todos </option>
           <option value="0" <?php echo (isset($_POST["porvalidar"]) && $_POST["porvalidar"]=='0')?'selected':''; ?>> Inactivos </option>
@@ -259,6 +273,9 @@ select.filtros {
         </select></td>
       <td width="63" align="right"><input type="submit" value="Buscar" name="Buscar" id="Buscar" class="btnVolver"/></td>
     </tr>
+    <tr >
+      <td colspan="14">Se han encontrado <?php echo sizeof($resultLineas); ?> registros.</td>
+    <tr>
   </table>
 </form>
 <table border="0" cellpadding="2" cellspacing="1" style="border:1px solid #DFD5C3; width:100%;">
