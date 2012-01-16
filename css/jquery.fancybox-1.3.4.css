@@ -150,14 +150,17 @@
 	background: transparent url('../js/jquery/fancybox/blank.gif');
 	z-index: 1102;
 	display: none;
+    display: none !important;
 }
 
 #fancybox-left {
 	left: 0px;
+    display: none !important;
 }
 
 #fancybox-right {
 	right: 0px;
+    display: none !important;
 }
 
 #fancybox-left-ico, #fancybox-right-ico {

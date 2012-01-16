@@ -44,8 +44,16 @@ P/N # {$product.reference} <BR>
 					<li class="lista_atributo">{$feature.value|escape:'htmlall':'UTF-8'}</li>
 					{/if}
 				{/foreach}
+<<<<<<< HEAD
                 <p class="encontraste"><a class="encontraste_link" href="modules/comparadordeprecios/comparadordeprecios-form.php?id_product={$product.id_product|intval}">Encontraste este producto m&aacute;s barato, &iquest;D&oacute;nde?</a></p>
+=======
+                <p class="encontraste"><a rel="iframe" class="iframe" href="modules/comparadordeprecios/comparadordeprecios-form.php?content_only=1&id_product={$product.id_product|intval}">&iquest;¿D&oacute;nde encontr&oacute; este producto m&aacute;s barato?</a></p>
+>>>>>>> bedff6d841526f08e6d0054a27f7cfad356526e4
                 </ul>
+				
+				<script type="text/javascript" src="js/jquery/jquery.fancybox-1.3.4.js"></script>
+				<link href="css/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" media="screen" />
+				<script type="text/javascript">$('a.iframe').fancybox();</script>
 				{/if}
 			</div>																				 
 			<div class="right_block">
