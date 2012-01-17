@@ -109,13 +109,18 @@ class ComparadorDePrecios extends Module
 			if (empty($_POST['dacoURL']) OR empty($_POST['dacoURL']))
 				$error = $this->l('Debes completar todos los campos.');
 			elseif (empty($_POST['dacoEmail']) OR !Validate::isEmail($_POST['dacoEmail']))
-				$error = $this->l('El email ingresado es inválido.');
+				$error = $this->l('El email ingresado es invÃ¡lido.');
 			elseif (!isset($_POST['dacoUsuario']) OR !isset($_POST['dacoBip']) OR !is_numeric($_POST['dacoBip']))
 				$error = $this->l('Ha ocurrido un error durante el proceso.');
 			else{
 			
 				if (empty($_POST['product_manufacturer'])){
 					$manofacturer="Sin Marca";
+<<<<<<< HEAD
+=======
+				}else{
+					$manofacturer=$_POST['product_manufacturer'];
+>>>>>>> 659fd895f88c3f47ca2682e1bd11b0b3eceb026f
 				}
 				if (! Db::getInstance()->AutoExecute("comparadorprecios", array('dacoBip' =>  $_POST['dacoBip'], 'dacoEmail' =>  $_POST['dacoEmail'], 'dacoUsuario' =>  $_POST['dacoUsuario'],'dacoURL' =>  $_POST['dacoURL'],'dacoCategoryDefault' =>  $_POST['categoryDefault'],'dacoMarca' =>  $manofacturer), 'INSERT')){
 					$error = $this->l('Ha ocurrido un error al guardar los datos.');
