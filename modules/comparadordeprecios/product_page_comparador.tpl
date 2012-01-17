@@ -24,4 +24,7 @@
 *  International Registered Trademark & Property of PrestaShop SA
 *}
 
-<li id="encontraste1"><a href="{$this_path}comparadordeprecios-form.php?id_product={$smarty.get.id_product|intval}">¿Dónde encontró este producto mas barato?</a></li>
+
+<li id="encontraste1"><a rel="iframe" class="iframe" href="{$this_path}comparadordeprecios-form.php?content_only=1&id_product={$smarty.get.id_product|intval}">¿Dónde encontró este producto mas barato?</a></li>
+
+<script type="text/javascript">$('a.iframe').fancybox();</script>

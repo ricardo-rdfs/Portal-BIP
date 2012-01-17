@@ -190,7 +190,7 @@ class ComparadorDePrecios extends Module
 
 	public function hookProductTab($params)
     {
-		return '<li><a href="#idTab59999" class="idTabHrefShort">Compara en otra tienda</a></li>';
+		return '<li><a href="#idTab59999" class="idTabHrefShort">Compara precios</a></li>';
 	}
 	
 	public function hookProductTabContent($params)
@@ -204,16 +204,18 @@ class ComparadorDePrecios extends Module
 		FROM (
 		SELECT max(dacoId) dacoId, dacoTienda
 		FROM comparadorprecios
-		WHERE dacoBip !=".$product->id."
+		WHERE dacoBip =".$product->id."
+		AND dacoComparacionActiva = 1
+		AND dacoFuncionando	= 1
 		GROUP BY dacoTienda
 		ORDER BY dacoTienda ASC) ids, comparadorprecios cp
 		WHERE cp.dacoId = ids.dacoId
 		ORDER BY dacoTienda ASC ";
 		$resultComparacion = Db::getInstance()->ExecuteS($queryComparacion);
 		
-		$output = '<div id="idTab59999"><table>';
+		$output = '<div id="idTab59999"><table width="400" border="0" cellspacing="0" cellpadding="2" style="border:1px solid #CCC;"><tr style="background-color:#FFFFCC;"><td style="font-weight:bold">Tienda</td><td style="font-weight:bold">Precio</td><td style="font-weight:bold">Tipo de Precio</td><td style="font-weight:bold">Forma de Pago</td>';
 		foreach($resultComparacion as $linea){
-			$output.= '<tr><td>'.$linea["dacoTienda"].'</td><td>$'.number_format($linea["dacoPrecioComparacion"],0,',','.').'</td></tr>';
+			$output.= '<tr><td>'.$linea["dacoTienda"].'</td><td>$'.number_format($linea["dacoPrecioComparacion"],0,',','.').'</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
 		}
 		$output.= '</table></div>';
 		return $output;
