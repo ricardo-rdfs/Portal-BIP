@@ -190,7 +190,7 @@ class ComparadorDePrecios extends Module
 
 	public function hookProductTab($params)
     {
-		return '<li><a href="#idTab59999" class="idTabHrefShort">Compara en otra tienda</a></li>';
+		return '<li><a href="#idTab59999" class="idTabHrefShort">Compara en otra tienda 10</a></li>';
 	}
 	
 	public function hookProductTabContent($params)
