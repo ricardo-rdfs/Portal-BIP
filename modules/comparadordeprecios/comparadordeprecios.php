@@ -1,6 +1,5 @@
 <?php
 
-
 if (!defined('_PS_VERSION_'))
 	exit;
 
@@ -222,4 +221,4 @@ class ComparadorDePrecios extends Module
 	}
 
 		
-}
+}		
