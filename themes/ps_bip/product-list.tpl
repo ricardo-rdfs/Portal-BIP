@@ -25,7 +25,7 @@
 *}
 
 {if isset($products)}
-	<!-- Products list -->
+	<!-- Products lisst -->
 	<ul id="product_list" class="clear">
 	{foreach from=$products item=product name=products}
 		<li class="ajax_block_product {if $smarty.foreach.products.first}first_item{elseif $smarty.foreach.products.last}last_item{/if} {if $smarty.foreach.products.index % 2}alternate_item{else}item{/if} clearfix">
@@ -34,7 +34,7 @@
 				<h3>{if isset($product.new) && $product.new == 1}<span class="new">{l s='New'}</span>{/if}<a href="{$product.link|escape:'htmlall':'UTF-8'}" title="{$product.name|escape:'htmlall':'UTF-8'}">{$product.name|truncate:35:'...'|escape:'htmlall':'UTF-8'}</a></h3>
 				<p class="product_desc">
 C.BIP : {$product["id_product"]}<BR>
-P/N # {$product.reference} <BR>
+P/N #  {$product.reference} <BR>
 
 </p>
 				{if isset($prod_features[$product["id_product"]])}
