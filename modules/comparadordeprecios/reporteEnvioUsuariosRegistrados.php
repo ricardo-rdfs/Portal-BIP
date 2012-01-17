@@ -76,7 +76,7 @@ function calculaLargo() {
     </tr>
 	</table>
   
-	<table border="0" cellpadding="2" cellspacing="1" style="border:1px solid #DFD5C3; width:100%;">
+	<table border="0" cellpadding="2" cellspacing="1" style="border:3px solid #DFD5C3; width:100%;">
     <tr style="font-family: Arial, Helvetica, sans-serif; font-size:10px; color:green; background-color:#F4E6C9;">
       <td>Cliente</td>
       <td>Cantidad de Registros Enviados por Usuario</td>
