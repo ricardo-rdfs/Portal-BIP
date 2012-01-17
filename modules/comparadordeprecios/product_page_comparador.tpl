@@ -25,4 +25,3 @@
 *}
 
 <li id="encontraste1"><a href="{$this_path}comparadordeprecios-form.php?id_product={$smarty.get.id_product|intval}">¿Dónde encontró este producto mas barato?</a></li>
-1
