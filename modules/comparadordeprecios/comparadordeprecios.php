@@ -213,7 +213,7 @@ class ComparadorDePrecios extends Module
 		ORDER BY dacoTienda ASC ";
 		$resultComparacion = Db::getInstance()->ExecuteS($queryComparacion);
 		
-		$output = '<div id="idTab59999"><table width="400" border="0" cellspacing="0" cellpadding="2" style="border:1px solid #CCC;"><tr style="background-color:#FFFFCC;"><td style="font-weight:bold">Tienda</td><td style="font-weight:bold">Precio</td><td style="font-weight:bold">Tipo de Precio</td><td style="font-weight:bold">Forma de Pago</td>';
+		$output = '<div id="idTab59999"><table width="400" border="0" cellspacing="0" cellpadding="2" style="border:1px solid #CCC;"><tr style="background-color:#FFFFCC;"><td style="font-weight:bold">Tienda</td><td style="font-weight:bold">Precio</td><td style="font-weight:bold">Tipo de Precio</td><td style="font-weight:bold">Forma de Pago</td></tr>';
 		foreach($resultComparacion as $linea){
 			$output.= '<tr><td>'.$linea["dacoTienda"].'</td><td>$'.number_format($linea["dacoPrecioComparacion"],0,',','.').'</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
 		}
