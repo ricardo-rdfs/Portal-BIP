@@ -187,9 +187,9 @@ P/N #  {$product.reference} <BR>
                 <p class="encontraste"><a href="#">&iquest;D&oacute;nde encontr&oacute; este producto m&aacute;s barato?</a></p>
                 </ul>
 				
-				<!--<script type="text/javascript" src="js/jquery/jquery.fancybox-1.3.4.js"></script>
+				<script type="text/javascript" src="js/jquery/jquery.fancybox-1.3.4.js"></script>
 				<link href="css/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" media="screen" />
-				<script type="text/javascript">$('a.iframe').fancybox();</script>-->
+				<script type="text/javascript">$('a.iframe').fancybox();</script>
 				{/if}
 			</div>																				 
 			<div class="right_block">
