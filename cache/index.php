@@ -1,7 +1,8 @@
 <?php
 /*
 * 2007-2011 PrestaShop 
-*
+* 98095352   5425539
+ * dor 99055070
 * NOTICE OF LICENSE
 *
 * This source file is subject to the Open Software License (OSL 3.0)
