@@ -1921,13 +1921,13 @@ class BlockLayered extends Module
                 $wLikeArr=explode(" ",$whereLikeFilter); 
                 
 		if($wLikeArr[0]=="" /*or !in_array($wLikeArr[0],$tmp_lett)*/)
-                    $wLikeArr[0] = $whereLikeFilter;
+                    $wLikeArr[0] = '';
                 if($wLikeArr[1]=="" /*or !in_array($wLikeArr[1],$tmp_lett)*/)
-                    $wLikeArr[1] = $whereLikeFilter;
+                    $wLikeArr[1] = '';
                 if($wLikeArr[2]=="" /*or !in_array($wLikeArr[2],$tmp_lett)*/)
-                    $wLikeArr[2] = $whereLikeFilter;
+                    $wLikeArr[2] = '';
                 if($wLikeArr[3]=="" /*or !in_array($wLikeArr[3],$tmp_lett)*/)
-                    $wLikeArr[3] = $whereLikeFilter;
+                    $wLikeArr[3] = '';
 
                 
 		$parent = new Category((int)$id_parent);
@@ -2382,13 +2382,13 @@ OR
                 $wLikeArr=explode(" ",$whereLikeFilter); 
 		
 		if($wLikeArr[0]=="" /*or !in_array($wLikeArr[0],$tmp_lett)*/)
-                    $wLikeArr[0] = $whereLikeFilter;
+                    $wLikeArr[0] = '';
                 if($wLikeArr[1]=="" /*or !in_array($wLikeArr[1],$tmp_lett)*/)
-                    $wLikeArr[1] = $whereLikeFilter;
+                    $wLikeArr[1] = '';
                 if($wLikeArr[2]=="" /*or !in_array($wLikeArr[2],$tmp_lett)*/)
-                    $wLikeArr[2] = $whereLikeFilter;
+                    $wLikeArr[2] = '';
                 if($wLikeArr[3]=="" /*or !in_array($wLikeArr[3],$tmp_lett)*/)
-                    $wLikeArr[3] = $whereLikeFilter;
+                    $wLikeArr[3] = '';
 
                
                 
