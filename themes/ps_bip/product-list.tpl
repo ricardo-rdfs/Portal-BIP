@@ -44,7 +44,7 @@ P/N #  {$product.reference} <BR>
 					<li class="lista_atributo">{$feature.value|escape:'htmlall':'UTF-8'}</li>
 					{/if}
 				{/foreach}
-<!--<p class="encontraste"><a rel="iframe" class="iframe" href="modules/comparadordeprecios/comparadordeprecios-form.php?content_only=1&id_product={$product.id_product|intval}">&iquest;D&oacute;nde encontr&oacute; este producto m&aacute;s barato?</a></p>-->
+<!-- lnk<p class="encontraste"><a rel="iframe" class="iframe" href="modules/comparadordeprecios/comparadordeprecios-form.php?content_only=1&id_product={$product.id_product|intval}">&iquest;D&oacute;nde encontr&oacute; este producto m&aacute;s barato?</a></p>-->
                 <p class="encontraste"><a href="#">&iquest;D&oacute;nde encontr&oacute; este producto m&aacute;s barato?</a></p>
                 </ul>
 				
