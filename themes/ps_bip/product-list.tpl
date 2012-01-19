@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {*
 * 2007-2011 PrestaShop 
 *
@@ -275,5 +274,4 @@ P/N #  {$product.reference} <BR>
 	{/foreach}
 	</ul>
 	<!-- /Products list -->
->>>>>>> 0232f8eb0c8f3cf29253d13c72a3cea8aa6517f4
 {/if}
