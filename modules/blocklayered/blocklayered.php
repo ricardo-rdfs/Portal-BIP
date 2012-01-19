@@ -2803,7 +2803,7 @@ OR
 OR
 (cl.name LIKE  "%'.$whereLikeFilter.'%")   )>=1
 					GROUP BY cl.name ORDER BY count_products desc,level_depth, c.position';
-                                       
+                                       ECHO $sqlQuery['select']."\n".$sqlQuery['from']."\n".$sqlQuery['join']."\n".$sqlQuery['where']."\n".$sqlQuery['group'];
                                         }else{
                                         
                                         if($usado==true){
