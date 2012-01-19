@@ -1926,17 +1926,9 @@ class BlockLayered extends Module
                     $wLikeArr[1] = $whereLikeFilter;
                 if($wLikeArr[2]=="" /*or !in_array($wLikeArr[2],$tmp_lett)*/)
                     $wLikeArr[2] = $whereLikeFilter;
-                
-                $catArr[0] = substr($wLikeArr[0], 0, -2);
-                $catArr[1] = substr($wLikeArr[1], 0, -2);
-                $catArr[2] = substr($wLikeArr[2], 0, -2);
-                
-                if($catArr[0]=="")
-                    $catArr[0] = $whereLikeFilter;
-                if($catArr[1]=="")
-                    $catArr[1] = $whereLikeFilter;
-                if($catArr[2]=="")
-                    $catArr[2] = $whereLikeFilter;
+                if($wLikeArr[3]=="" /*or !in_array($wLikeArr[3],$tmp_lett)*/)
+                    $wLikeArr[3] = $whereLikeFilter;
+
                 
 		$parent = new Category((int)$id_parent);
 		if (!count($selectedFilters['category'])){
@@ -2075,7 +2067,11 @@ class BlockLayered extends Module
                     LEFT JOIN '._DB_PREFIX_.'product_lang pl ON  p.id_product = pl.id_product
                     LEFT JOIN '._DB_PREFIX_.'category_lang cl ON p.`id_category_default` = cl.id_category
                     WHERE 1 '.$queryFiltersWhere.' 
-                    AND (cl.name LIKE  "%'.$whereLikeFilter.'%" OR cl.name LIKE  "%'.$catArr[0].'%" OR cl.name LIKE  "%'.$catArr[1].'%" OR cl.name LIKE  "%'.$catArr[2].'%" OR pl.name like "%'.$whereLikeFilter.'%" OR pl.name like "%'.$wLikeArr[0].'%" OR pl.name like "%'.$wLikeArr[1].'%"  OR pl.name like "%'.$wLikeArr[2].'%" OR p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
+                    AND (pl.description like "%'.$wLikeArr[0].'%" AND pl.description like "%'.$wLikeArr[1].'%"  AND  pl.description like "%'.$wLikeArr[2].'%" AND  pl.description like "%'.$wLikeArr[3].'%") 
+OR 
+(p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
+OR
+(cl.name LIKE  "%'.$whereLikeFilter.'%")
                     GROUP BY id_product', false);
 
                     $allProductsIn = Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('
@@ -2085,7 +2081,12 @@ class BlockLayered extends Module
                     '.$queryFiltersFrom.'
                     LEFT JOIN '._DB_PREFIX_.'product_lang pl ON  p.id_product = pl.id_product
                     LEFT JOIN '._DB_PREFIX_.'category_lang cl ON p.`id_category_default` = cl.id_category
-                    WHERE 1 '.$queryFiltersWhere.'  AND (cl.name LIKE  "%'.$whereLikeFilter.'%" OR cl.name LIKE  "%'.$catArr[0].'%" OR cl.name LIKE  "%'.$catArr[1].'%" OR cl.name LIKE  "%'.$catArr[2].'%" OR pl.name like "%'.$whereLikeFilter.'%" OR pl.name like "%'.$wLikeArr[0].'%" OR pl.name like "%'.$wLikeArr[1].'%"  OR pl.name like "%'.$wLikeArr[2].'%" OR p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'")   GROUP BY id_product', false);
+                    WHERE 1 '.$queryFiltersWhere.'  
+                    AND (pl.description like "%'.$wLikeArr[0].'%" AND pl.description like "%'.$wLikeArr[1].'%"  AND  pl.description like "%'.$wLikeArr[2].'%" AND  pl.description like "%'.$wLikeArr[3].'%") 
+OR 
+(p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
+OR
+(cl.name LIKE  "%'.$whereLikeFilter.'%")   GROUP BY id_product', false);
     
                 }else{
                     
@@ -2156,7 +2157,11 @@ class BlockLayered extends Module
 			LEFT JOIN '._DB_PREFIX_.'image i ON (i.id_product = p.id_product AND i.cover = 1)
 			LEFT JOIN '._DB_PREFIX_.'image_lang il ON (i.id_image = il.id_image AND il.id_lang = '.(int)($cookie->id_lang).')
 			LEFT JOIN '._DB_PREFIX_.'manufacturer m ON (m.id_manufacturer = p.id_manufacturer)
-			WHERE p.`active` = 1 AND  pl.id_lang = '.(int)$cookie->id_lang.'  AND (cl.name LIKE  "%'.$whereLikeFilter.'%" OR cl.name LIKE  "%'.$catArr[0].'%" OR cl.name LIKE  "%'.$catArr[1].'%" OR cl.name LIKE  "%'.$catArr[2].'%" OR pl.name like "%'.$whereLikeFilter.'%" OR pl.name like "%'.$wLikeArr[0].'%" OR pl.name like "%'.$wLikeArr[1].'%"  OR pl.name like "%'.$wLikeArr[2].'%" OR p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
+			WHERE p.`active` = 1 AND  pl.id_lang = '.(int)$cookie->id_lang.'  AND (pl.description like "%'.$wLikeArr[0].'%" AND pl.description like "%'.$wLikeArr[1].'%"  AND  pl.description like "%'.$wLikeArr[2].'%" AND  pl.description like "%'.$wLikeArr[3].'%") 
+OR 
+(p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
+OR
+(cl.name LIKE  "%'.$whereLikeFilter.'%") 
 			AND p.id_product IN ('.implode(',', $productIdList).')'
 			.' GROUP BY p.id_product ORDER BY '.Tools::getProductsOrder('by', Tools::getValue('orderby'), true));
                 
@@ -2376,23 +2381,16 @@ class BlockLayered extends Module
                 
                 $wLikeArr=explode(" ",$whereLikeFilter); 
 		
-                if($wLikeArr[0]=="")
+		if($wLikeArr[0]=="" /*or !in_array($wLikeArr[0],$tmp_lett)*/)
                     $wLikeArr[0] = $whereLikeFilter;
-                if($wLikeArr[1]=="")
+                if($wLikeArr[1]=="" /*or !in_array($wLikeArr[1],$tmp_lett)*/)
                     $wLikeArr[1] = $whereLikeFilter;
-                if($wLikeArr[2]=="")
+                if($wLikeArr[2]=="" /*or !in_array($wLikeArr[2],$tmp_lett)*/)
                     $wLikeArr[2] = $whereLikeFilter;
-                
-                $catArr[0] = substr($wLikeArr[0], 0, -2);
-                $catArr[1] = substr($wLikeArr[1], 0, -2);
-                $catArr[2] = substr($wLikeArr[2], 0, -2);
-                
-                if($catArr[0]=="")
-                    $catArr[0] = $whereLikeFilter;
-                if($catArr[1]=="")
-                    $catArr[1] = $whereLikeFilter;
-                if($catArr[2]=="")
-                    $catArr[2] = $whereLikeFilter;
+                if($wLikeArr[3]=="" /*or !in_array($wLikeArr[3],$tmp_lett)*/)
+                    $wLikeArr[3] = $whereLikeFilter;
+
+               
                 
 		/* Get the filters for the current category */
 		$filters = Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('SELECT * FROM '._DB_PREFIX_.'layered_category WHERE id_category = '.(int)$id_parent.'
@@ -2491,8 +2489,11 @@ class BlockLayered extends Module
                                         LEFT JOIN '._DB_PREFIX_.'category_lang cl ON p.`id_category_default` = cl.id_category
                                         ';
                                         
-					$sqlQuery['where'] = 'WHERE p.`active` = 1 and (cl.name LIKE  "%'.$whereLikeFilter.'%" OR cl.name LIKE  "%'.$catArr[0].'%" OR cl.name LIKE  "%'.$catArr[1].'%" OR cl.name LIKE  "%'.$catArr[2].'%" OR 
-pl.name like "%'.$whereLikeFilter.'%" OR pl.name like "%'.$wLikeArr[0].'%" OR pl.name like "%'.$wLikeArr[1].'%"  OR pl.name like "%'.$wLikeArr[2].'%" OR p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'")  ';
+					$sqlQuery['where'] = 'WHERE p.`active` = 1 and (pl.description like "%'.$wLikeArr[0].'%" AND pl.description like "%'.$wLikeArr[1].'%"  AND  pl.description like "%'.$wLikeArr[2].'%" AND  pl.description like "%'.$wLikeArr[3].'%") 
+OR 
+(p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
+OR
+(cl.name LIKE  "%'.$whereLikeFilter.'%")  ';
 					$sqlQuery['group'] = ' GROUP BY p.id_product ';
                                     }else{
 
@@ -2544,8 +2545,11 @@ pl.name like "%'.$whereLikeFilter.'%" OR pl.name like "%'.$wLikeArr[0].'%" OR pl
                                         LEFT JOIN '._DB_PREFIX_.'category_lang cl ON p.`id_category_default` = cl.id_category    
 ';
 					$sqlQuery['where'] = '
-					WHERE (cl.name LIKE  "%'.$whereLikeFilter.'%" OR cl.name LIKE  "%'.$catArr[0].'%" OR cl.name LIKE  "%'.$catArr[1].'%" OR cl.name LIKE  "%'.$catArr[2].'%" OR 
-pl.name like "%'.$whereLikeFilter.'%" OR pl.name like "%'.$wLikeArr[0].'%" OR pl.name like "%'.$wLikeArr[1].'%"  OR pl.name like "%'.$wLikeArr[2].'%" OR p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") ';
+					WHERE (pl.description like "%'.$wLikeArr[0].'%" AND pl.description like "%'.$wLikeArr[1].'%"  AND  pl.description like "%'.$wLikeArr[2].'%" AND  pl.description like "%'.$wLikeArr[3].'%") 
+OR 
+(p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
+OR
+(cl.name LIKE  "%'.$whereLikeFilter.'%") ';
 					$sqlQuery['group'] = ' GROUP BY p.id_manufacturer order by m.name asc ';
                                     }else{
                                         
@@ -2602,8 +2606,11 @@ pl.name like "%'.$whereLikeFilter.'%" OR pl.name like "%'.$wLikeArr[0].'%" OR pl
 					LEFT JOIN '._DB_PREFIX_.'layered_indexable_attribute_lang_value lial
 					ON (lial.id_attribute = lpa.id_attribute AND lial.id_lang = '.(int)$cookie->id_lang.') ';
 					$sqlQuery['where'] = 'WHERE a.id_attribute_group = '.(int)$filter['id_value'].'
-					AND (cl.name LIKE  "%'.$whereLikeFilter.'%" OR cl.name LIKE  "%'.$catArr[0].'%" OR cl.name LIKE  "%'.$catArr[1].'%" OR cl.name LIKE  "%'.$catArr[2].'%" OR 
-pl.name like "%'.$whereLikeFilter.'%" OR pl.name like "%'.$wLikeArr[0].'%" OR pl.name like "%'.$wLikeArr[1].'%"  OR pl.name like "%'.$wLikeArr[2].'%" OR p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'")  AND p.id_product IN (
+					AND (pl.description like "%'.$wLikeArr[0].'%" AND pl.description like "%'.$wLikeArr[1].'%"  AND  pl.description like "%'.$wLikeArr[2].'%" AND  pl.description like "%'.$wLikeArr[3].'%") 
+OR 
+(p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
+OR
+(cl.name LIKE  "%'.$whereLikeFilter.'%")  AND p.id_product IN (
 					SELECT id_product
 					FROM '._DB_PREFIX_.'category_product cp
 					INNER JOIN '._DB_PREFIX_.'category c ON (c.id_category = cp.id_category)) ';
@@ -2701,8 +2708,11 @@ pl.name like "%'.$whereLikeFilter.'%" OR pl.name like "%'.$wLikeArr[0].'%" OR pl
 					LEFT JOIN '._DB_PREFIX_.'layered_indexable_feature_value_lang_value lifvl
 					ON (lifvl.id_feature_value = fp.id_feature_value AND lifvl.id_lang = '.(int)$cookie->id_lang.') ';
 					$sqlQuery['where'] = 'WHERE p.`active` = 1 AND fp.id_feature = '.(int)$filter['id_value'].'
-					AND (cl.name LIKE  "%'.$whereLikeFilter.'%" OR cl.name LIKE  "%'.$catArr[0].'%" OR cl.name LIKE  "%'.$catArr[1].'%" OR cl.name LIKE  "%'.$catArr[2].'%" OR 
-pl.name like "%'.$whereLikeFilter.'%" OR pl.name like "%'.$wLikeArr[0].'%" OR pl.name like "%'.$wLikeArr[1].'%"  OR pl.name like "%'.$wLikeArr[2].'%" OR p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'")  AND p.id_product IN (
+					AND (pl.description like "%'.$wLikeArr[0].'%" AND pl.description like "%'.$wLikeArr[1].'%"  AND  pl.description like "%'.$wLikeArr[2].'%" AND  pl.description like "%'.$wLikeArr[3].'%") 
+OR 
+(p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
+OR
+(cl.name LIKE  "%'.$whereLikeFilter.'%")  AND p.id_product IN (
 					SELECT id_product
 					FROM '._DB_PREFIX_.'category_product cp
 					INNER JOIN '._DB_PREFIX_.'category c ON (c.id_category = cp.id_category)) ';
@@ -2775,7 +2785,11 @@ pl.name like "%'.$whereLikeFilter.'%" OR pl.name like "%'.$wLikeArr[0].'%" OR pl
                                         LEFT JOIN '._DB_PREFIX_.'category_lang cl ON p.`id_category_default` = cl.id_category
 ';
                                         
-                                        $sqlQuery['where'] = ' WHERE cp.id_category = c.id_category and (cl.name LIKE  "%'.$whereLikeFilter.'%" OR cl.name LIKE  "%'.$catArr[0].'%" OR cl.name LIKE  "%'.$catArr[1].'%" OR cl.name LIKE  "%'.$catArr[2].'%" OR pl.name like "%'.$whereLikeFilter.'%" OR pl.name like "%'.$wLikeArr[0].'%" OR pl.name like "%'.$wLikeArr[1].'%"  OR pl.name like "%'.$wLikeArr[2].'%" OR p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'")   ';
+                                        $sqlQuery['where'] = ' WHERE cp.id_category = c.id_category and (pl.description like "%'.$wLikeArr[0].'%" AND pl.description like "%'.$wLikeArr[1].'%"  AND  pl.description like "%'.$wLikeArr[2].'%" AND  pl.description like "%'.$wLikeArr[3].'%") 
+OR 
+(p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
+OR
+(cl.name LIKE  "%'.$whereLikeFilter.'%")   ';
                                         
                                         $sqlQuery['group'] = ') count_products
 					FROM '._DB_PREFIX_.'category c
@@ -2783,8 +2797,11 @@ pl.name like "%'.$whereLikeFilter.'%" OR pl.name like "%'.$wLikeArr[0].'%" OR pl
 					WHERE (SELECT count(DISTINCT p.id_product) cont FROM '._DB_PREFIX_.'category_product cp 
                                             LEFT JOIN '._DB_PREFIX_.'product p ON (p.id_product = cp.id_product AND p.active = 1) 
                                             LEFT JOIN '._DB_PREFIX_.'product_lang pl ON (pl.id_product = p.id_product) 
-                                            WHERE cp.id_category = c.id_category and (cl.name LIKE  "%'.$whereLikeFilter.'%" OR cl.name LIKE  "%'.$catArr[0].'%" OR cl.name LIKE  "%'.$catArr[1].'%" OR cl.name LIKE  "%'.$catArr[2].'%" OR 
-pl.name like "%'.$whereLikeFilter.'%" OR pl.name like "%'.$wLikeArr[0].'%" OR pl.name like "%'.$wLikeArr[1].'%"  OR pl.name like "%'.$wLikeArr[2].'%" OR p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'")   )>=1
+                                            WHERE cp.id_category = c.id_category and (pl.description like "%'.$wLikeArr[0].'%" AND pl.description like "%'.$wLikeArr[1].'%"  AND  pl.description like "%'.$wLikeArr[2].'%" AND  pl.description like "%'.$wLikeArr[3].'%") 
+OR 
+(p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
+OR
+(cl.name LIKE  "%'.$whereLikeFilter.'%")   )>=1
 					GROUP BY cl.name ORDER BY count_products desc,level_depth, c.position';
                                        
                                         }else{

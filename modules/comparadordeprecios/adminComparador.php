@@ -251,6 +251,22 @@ select.filtros {
 	text-decoration:none;
 	width:100px;
 }
+.texto2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:10px;
+	color:#000;
+	background-color:#FFFFFF;
+	text-decoration:none;
+	width:100px;
+}
+.texto3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:10px;
+	color:#000;
+	background-color:#FFFFFF;
+	text-decoration:none;
+	width:70px;
+}
 -->
 </style>
 </head>
@@ -258,18 +274,22 @@ select.filtros {
 <body>
 <input type="button" value="Volver" onClick="location.href = 'comparacionPreciosIndex.php';" class="btnVolver"/>
 <form action="adminComparador.php" enctype="multipart/form-data" autocomplete="off" id="buscarForm" name="buscarForm" method="post">
+<fieldset style="width:100%; border:1px solid #CCC;"><legend style="font:Arial, Helvetica, sans-serif; font-size:11px; color:#990000; font-weight:bold;">Filtros</legend>
   <input type="hidden" id="orderByHidden" name="orderByHidden" value="<?php echo $orderBy; ?>"/>
-  <table cellpadding="0" cellspacing="0" style="font-family: Arial, Helvetica, sans-serif; font-size:11px; color:#060; background-color:#FFFFFF; width:100%; height:35px;">
+  <table cellpadding="0" cellspacing="0" style="font-family: Arial, Helvetica, sans-serif; font-size:11px; color:#060; background-color:#FFFFFF; height:35px;">
     </tr>
-       <td width="31">Desde</td>
-     <td width="121"><input type="text" readonly="readonly" id="theDate1" name="theDate1" size="15" class="texto2" value="<?php echo (isset($_POST["theDate1"])?$_POST["theDate1"]:''); ?>"/> <script language="javascript"> if(document.getElementById("theDate1").value==""){ document.getElementById("theDate1").value = obtenerFechaActual();}</script>
+       <tr>
+         <td width="31">Desde</td>
+         <td width="10" align="left">:</td>
+     <td width="121"><input type="text" readonly id="theDate1" name="theDate1" size="15" class="texto3" value="<?php echo (isset($_POST["theDate1"])?$_POST["theDate1"]:''); ?>"/> <script language="javascript"> if(document.getElementById("theDate1").value==""){ document.getElementById("theDate1").value = obtenerFechaActual();}</script>
          <a href="#" onClick="displayCalendar(document.forms[0].theDate1,'dd/mm/yyyy',this)"><img src="dhtmlgoodies_calendar/imagenes/dtpick.gif" alt="Buscar Fecha" border="0" /></a></td>
-      <td width="8"></td>
-      <td width="57">Hasta</td>
-<td width="96"><input type="text" readonly="readonly" id="theDate2" name="theDate2" size="15" class="texto2" value="<?php echo (isset($_POST["theDate2"])?$_POST["theDate2"]:''); ?>"/> <script language="javascript"> if(document.getElementById("theDate2").value==""){ document.getElementById("theDate2").value = obtenerFechaActual();}</script>
-         <a href="#" onClick="displayCalendar(document.forms[0].theDate2,'dd/mm/yyyy',this)"><img src="dhtmlgoodies_calendar/imagenes/dtpick.gif" alt="Buscar Fecha" border="0" /></a></td>
-      <td width="60"></td>
+      <td width="10"></td>
+      <td width="57">Código BIP</td>
+      <td width="10" align="left">:</td>
+      <td><input type="text" id="busId" name="busId" class="texto3" value="<?php echo (isset($_POST["busId"])?mysql_real_escape_string(htmlspecialchars($_POST["busId"])):''); ?>" /></td>
+      <td width="10"></td>
       <td width="38">Tienda: </td>
+      <td width="10" align="left">:</td>
       <td width="100"><select name="tienda" id="tienda" class="filtros">
           <option value="" <?php echo (!isset($_POST["tienda"]))?'selected':''; ?>> Todas </option>
           <option value=".corona" <?php echo (isset($_POST["tienda"]) && $_POST["tienda"]=='.corona')?'selected':''; ?>> Corona </option>
@@ -281,6 +301,7 @@ select.filtros {
         </select></td>
       <td width="10"></td>
       <td width="47">Relaci&oacute;n: </td>
+      <td width="10" align="left">:</td>
       <td width="100"><select name="relacion" id="relacion" class="filtros">
           <option value="" <?php echo (!isset($_POST["relacion"]))?'selected':''; ?>> Todos </option>
           <option value="Idéntico" <?php echo (isset($_POST["relacion"]) && $_POST["relacion"]=='Idéntico')?'selected':''; ?>> Similar </option>
@@ -288,6 +309,7 @@ select.filtros {
         </select></td>
       <td width="10"></td>
       <td width="42">V&aacute;lidos: </td>
+      <td width="10" align="left">:</td>
       <td width="100"><select name="porvalidar" id="porvalidar" class="filtros">
           <option value="" <?php echo (!isset($_POST["porvalidar"]))?'selected':''; ?>> Todos </option>
           <option value="0" <?php echo (isset($_POST["porvalidar"]) && $_POST["porvalidar"]=='0')?'selected':''; ?>> Inactivos </option>
@@ -296,13 +318,17 @@ select.filtros {
       <td width="63" align="right"><input type="submit" value="Buscar" name="Buscar" id="Buscar" class="btnVolver"/></td>
     </tr>
     <tr>
-    	<td>Id</td>
-        <td><input type="text" id="busId" name="busId" value="<?php echo (isset($_POST["busId"])?mysql_real_escape_string(htmlspecialchars($_POST["busId"])):''); ?>" /></td>
+    	<td>Hasta</td>
+    	<td width="10" align="left">:</td>
+        <td width="96"><input type="text" readonly id="theDate2" name="theDate2" size="15" class="texto3" value="<?php echo (isset($_POST["theDate2"])?$_POST["theDate2"]:''); ?>"/> <script language="javascript"> if(document.getElementById("theDate2").value==""){ document.getElementById("theDate2").value = obtenerFechaActual();}</script>
+         <a href="#" onClick="displayCalendar(document.forms[0].theDate2,'dd/mm/yyyy',this)"><img src="dhtmlgoodies_calendar/imagenes/dtpick.gif" alt="Buscar Fecha" border="0" /></a></td>
         <td></td>
         <td>Nombre</td>
-        <td><input type="text" id="busNombre" name="busNombre" value="<?php echo (isset($_POST["busNombre"])?mysql_real_escape_string(htmlspecialchars($_POST["busNombre"])):''); ?>" /></td>
+        <td width="10" align="left">:</td>
+        <td><input type="text" id="busNombre" name="busNombre" class="texto2" value="<?php echo (isset($_POST["busNombre"])?mysql_real_escape_string(htmlspecialchars($_POST["busNombre"])):''); ?>" /></td>
         <td></td>
         <td>Marca</td>
+        <td width="10" align="left">:</td>
         <td><select name="marca" id="marca" class="filtros">
           <option value="" <?php echo (!isset($_POST["marca"]))?'selected':''; ?>> Todas </option>
           <?php 
@@ -316,6 +342,7 @@ select.filtros {
           </td>
         <td></td>
         <td>Categor&iacute;a</td>
+        <td width="10" align="left">:</td>
         <td><select name="categoria" id="categoria" class="filtros">
           <option value="" <?php echo (!isset($_POST["categoria"]))?'selected':''; ?>> Todas </option>
           <?php 
@@ -328,13 +355,15 @@ select.filtros {
           </select></td>
         <td></td>
         <td></td>
+        <td width="10" align="left">:</td>
         <td></td>
         <td></td>
     </tr>
     <tr >
-      <td colspan="14">Se han encontrado <?php echo sizeof($resultLineas); ?> registros.</td>
+      <td colspan="20">Se han encontrado <?php echo sizeof($resultLineas); ?> registros.</td>
     <tr>
   </table>
+</fieldset>
 </form>
 <table border="0" cellpadding="2" cellspacing="1" style="border:1px solid #DFD5C3; width:100%;">
   <tr style="font-family: Arial, Helvetica, sans-serif; font-size:10px; color:green; background-color:#F4E6C9;">
