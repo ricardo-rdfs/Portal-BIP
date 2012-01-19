@@ -1,34 +1,9 @@
-{*
-* 2007-2011 PrestaShop
-*
-* NOTICE OF LICENSE
-*
-* This source file is subject to the Academic Free License (AFL 3.0)
-* that is bundled with this package in the file LICENSE.txt.
-* It is also available through the world-wide-web at this URL:
-* http://opensource.org/licenses/afl-3.0.php
-* If you did not receive a copy of the license and are unable to
-* obtain it through the world-wide-web, please send an email
-* to license@prestashop.com so we can send you a copy immediately.
-*
-* DISCLAIMER
-*
-* Do not edit or add to this file if you wish to upgrade PrestaShop to newer
-* versions in the future. If you wish to customize PrestaShop for your
-* needs please refer to http://www.prestashop.com for more information.
-*
-*  @author PrestaShop SA <contact@prestashop.com>
-*  @copyright  2007-2011 PrestaShop SA
-*  @version  Release: $Revision: 9036 $
-*  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
-*  International Registered Trademark & Property of PrestaShop SA
-*}
-
-{capture name=path}{l s='Comparador de precios' mod='comparadordeprecios'}{/capture}
-{include file="$tpl_dir./breadcrumb.tpl"}
 
 <!--<h1>{l s='Si encontraste este articulo mas barato en otra tienda, dinos donde.'}</h1>-->
-
+<html>
+<head>
+</head>
+<body>
 <p class="bold">{l s='Si encontraste este articulo mas barato en otra tienda, dinos donde.' mod='comparadordeprecios'}.</p>
 {include file="$tpl_dir./errors.tpl"}
 
@@ -40,8 +15,8 @@
 			<h3>{l s='Informacion del producto' mod='comparadordeprecios'}</h3>
 
 			<p class="align_center">
-				<a href="{$productLink}"><img src="{$link->getImageLink($product->link_rewrite, $cover.id_image, 'small')}" alt="" title="{$cover.legend|escape:'htmlall':'UTF-8'}" /></a><br/>
-				<a href="{$productLink}">{$product->name|escape:'htmlall':'UTF-8'}</a>
+				<img src="{$link->getImageLink($product->link_rewrite, $cover.id_image, 'small')}" alt="" title="{$cover.legend|escape:'htmlall':'UTF-8'}" /><br/>
+				{$product->name|escape:'htmlall':'UTF-8'}
 			</p>
 
 			<p>
@@ -58,9 +33,9 @@
 		</fieldset>
         <input type="hidden" id="dacoBip" name="dacoBip" value="{$product->id}" />
         <input type="hidden" id="dacoUsuario" name="dacoUsuario" value="{if isset($smarty.post.dacoUsuario)}{$smarty.post.dacoUsuario|escape:'htmlall':'UTF-8'|stripslashes}{else}{$tipoUsuario}{/if}" />
+        <input type="hidden" id="categoryDefault" name="categoryDefault" value="{if isset($smarty.post.categoryDefault)}{$smarty.post.categoryDefault|escape:'htmlall':'UTF-8'|stripslashes}{else}{$categoryDefault}{/if}" />
+        <input type="hidden" id="product_manufacturer" name="product_manufacturer" value="{if isset($smarty.post.product_manufacturer)}{$smarty.post.product_manufacturer|escape:'htmlall':'UTF-8'|stripslashes}{else}{$product_manufacturer}{/if}" />
 	</form>
 {/if}
-
-<ul class="footer_links">
-	<li><a href="{$productLink}" class="button_large">{l s='Regresar' mod='comparadordeprecios'}</a></li>
-</ul>
+</body>
+</html>
