@@ -25,7 +25,9 @@
 *}
 
 {if isset($products)}
-	<!-- Products lisst -->
+	<!-- Products list -->
+	<script type="text/javascript" src="js/jquery/jquery.fancybox-1.3.4.js"></script>
+	<link href="css/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" media="screen" />
 	<ul id="product_list" class="clear">
 	{foreach from=$products item=product name=products}
 		<li class="ajax_block_product {if $smarty.foreach.products.first}first_item{elseif $smarty.foreach.products.last}last_item{/if} {if $smarty.foreach.products.index % 2}alternate_item{else}item{/if} clearfix">
@@ -44,7 +46,7 @@ P/N #  {$product.reference} <BR>
 					<li class="lista_atributo">{$feature.value|escape:'htmlall':'UTF-8'}</li>
 					{/if}
 				{/foreach}
-                <p class="encontraste"><a href="#">&iquest;D&oacute;nde encontr&oacute; este producto m&aacute;s barato?</a></p>
+                <p class="encontraste"><a rel="iframe" class="iframe" href="modules/comparadordeprecios/comparadordeprecios-form.php?content_only=1&id_product={$product.id_product|intval}">&iquest;D&oacute;nde encontr&oacute; este producto m&aacute;s barato?</a></p>
                 </ul>
 				{/if}
 			</div>																				 
@@ -130,5 +132,6 @@ P/N #  {$product.reference} <BR>
 		</li>
 	{/foreach}
 	</ul>
+	<script type="text/javascript">$('a.iframe').fancybox();</script>
 	<!-- /Products list -->
 {/if}
