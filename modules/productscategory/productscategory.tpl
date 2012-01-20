@@ -23,7 +23,7 @@
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registered Trademark & Property of PrestaShop SA
 *}
-<div  class="block products_block">
+
 {if count($categoryProducts) > 0 && $categoryProducts !== false}
 	<h2 class="productscategory_h2">{$categoryProducts|@count} {l s='other products in the same category:' mod='productscategory'}</h2>
 	<div id="{if count($categoryProducts) > 5}productscategory{else}productscategory_noscroll{/if}">
@@ -54,4 +54,3 @@
 		$('#productscategory_list').trigger('goto', [{$middlePosition}-3]);
 	</script>
 {/if}
-</div>
