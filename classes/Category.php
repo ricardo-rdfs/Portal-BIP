@@ -512,6 +512,8 @@ class CategoryCore extends ObjectModel
                 INNER JOIN `'._DB_PREFIX_.'product_attribute` pa ON (p.id_product = pa.id_product)
                 INNER JOIN '._DB_PREFIX_.'product_attribute_combination pac ON (pa.id_product_attribute = pac.id_product_attribute)
 		LEFT JOIN `'._DB_PREFIX_.'product_lang` pl ON (p.`id_product` = pl.`id_product`)
+                LEFT JOIN `'._DB_PREFIX_.'image` i ON (i.`id_product` = p.`id_product` AND i.`cover` = 1)
+		LEFT JOIN `'._DB_PREFIX_.'image_lang` il ON (i.`id_image` = il.`id_image` AND il.`id_lang` = '.(int)($id_lang).')
 		LEFT JOIN `'._DB_PREFIX_.'tax_rule` tr ON (p.`id_tax_rules_group` = tr.`id_tax_rules_group`
 			AND tr.`id_country` = '.(int)Country::getDefaultCountryId().'
 			AND tr.`id_state` = 0)
