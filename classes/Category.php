@@ -496,7 +496,7 @@ class CategoryCore extends ObjectModel
 //mbj
 	public static function getProductsRelacionados($id_lang, $start, $limit, $idProduct)
 	{
-
+global $cookie;
              foreach (Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('
 		SELECT p.id_category_default
 		FROM `'._DB_PREFIX_.'product` p 
@@ -529,7 +529,8 @@ class CategoryCore extends ObjectModel
 		($limit > 0 ? ' LIMIT '.(int)($start).','.(int)($limit) : '')
 		);
 
-		return ($rq);
+                	/* Modify SQL result */
+		return Product::getProductsProperties($id_lang, $rq);
 	}   
         
 	public function getProducts($id_lang, $p, $n, $orderBy = NULL, $orderWay = NULL, $getTotal = false, $active = true, $random = false, $randomNumberProducts = 1, $checkAccess = true)
