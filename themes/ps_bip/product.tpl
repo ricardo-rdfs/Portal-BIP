@@ -159,7 +159,7 @@ var fieldRequired = '{l s='Please fill in all required fields, then save the cus
                 if(nCuotas.value==5)
                     $('#valcuotas').text(formatCurrency(Math.round((parseInt($('#quantity_wanted').val()*'{/literal}{$precio_tienda}{literal}')-(parseInt($('#quantity_wanted').val()*'{/literal}{$precio_tienda}{literal}'))*0.02)/nCuotas.value), currencyFormat, currencySign, currencyBlank));
                 if(nCuotas.value==6)
-                    $('#valcuotas').text(formatCurrency(('{/literal}{$precio_tienda}{literal}'/nCuotas.value), currencyFormat, currencySign, currencyBlank));    
+                    $('#valcuotas').text(formatCurrency(Math.round((parseInt($('#quantity_wanted').val()*'{/literal}{$precio_tienda}{literal}')-(parseInt($('#quantity_wanted').val()*'{/literal}{$precio_tienda}{literal}'))*1)/nCuotas.value), currencyFormat, currencySign, currencyBlank));    
         }
 	//]]>
 </script>
