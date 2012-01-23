@@ -29,7 +29,7 @@
 	<p>Productos Relacionados</p>
 	<div id="{if count($categoryProducts) > 5}productscategory{else}productscategory_noscroll{/if}">
 	{if count($categoryProducts) > 5}<a id="productscategory_scroll_left" title="{l s='Previous' mod='productscategory'}" href="javascript:{ldelim}{rdelim}">{l s='Previous' mod='productscategory'}</a>{/if}
-	<div id="productscategory_list">
+	<div id="productscategory_list" align="center">
 		<ul {if count($categoryProducts) > 5}style="width: {math equation="width * nbImages" width=107 nbImages=$categoryProducts|@count}px"{/if}>
 			{foreach from=$categoryProducts item='categoryProduct' name=categoryProduct}
 			<li {if count($categoryProducts) < 6}style="width: {math equation="width / nbImages" width=94 nbImages=$categoryProducts|@count}%"{/if}>
