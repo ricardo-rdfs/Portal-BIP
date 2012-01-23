@@ -491,13 +491,43 @@ class CategoryCore extends ObjectModel
 	  * @param integer $id_lang Language ID
 	  * @param integer $p Page number
 	  * @param integer $n Number of products per page
-	  * @param boolean $getTotal return the number of results instead of the results themself
-	  * @param boolean $active return only active products
-	  * @param boolean $random active a random filter for returned products
-	  * @param int $randomNumberProducts number of products to return if random is activated
-	  * @param boolean $checkAccess set to false to return all products (even if customer hasn't access)
-	  * @return mixed Products or number of products
 	  */
+        
+//mbj
+	public static function getProductsRelacionados($id_lang, $start, $limit, $idProduct)
+	{
+
+             foreach (Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('
+		SELECT p.id_category_default
+		FROM `'._DB_PREFIX_.'product` p 
+		WHERE p.id_product = '.(int)$idProduct) as $subrow){
+			$idCatDef = $subrow['id_category_default'];
+                }    
+                
+
+		$rq = Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('
+		SELECT p.*, pl.* , t.`rate` AS tax_rate, m.`name` AS manufacturer_name, s.`name` AS supplier_name
+		FROM `'._DB_PREFIX_.'product` p
+                INNER JOIN `'._DB_PREFIX_.'product_attribute` pa ON (p.id_product = pa.id_product)
+                INNER JOIN '._DB_PREFIX_.'product_attribute_combination pac ON (pa.id_product_attribute = pac.id_product_attribute)
+		LEFT JOIN `'._DB_PREFIX_.'product_lang` pl ON (p.`id_product` = pl.`id_product`)
+		LEFT JOIN `'._DB_PREFIX_.'tax_rule` tr ON (p.`id_tax_rules_group` = tr.`id_tax_rules_group`
+			AND tr.`id_country` = '.(int)Country::getDefaultCountryId().'
+			AND tr.`id_state` = 0)
+		LEFT JOIN `'._DB_PREFIX_.'tax` t ON (t.`id_tax` = tr.`id_tax`)
+		LEFT JOIN `'._DB_PREFIX_.'manufacturer` m ON (m.`id_manufacturer` = p.`id_manufacturer`)
+		LEFT JOIN `'._DB_PREFIX_.'supplier` s ON (s.`id_supplier` = p.`id_supplier`)'.
+		($id_category ? 'LEFT JOIN `'._DB_PREFIX_.'category_product` c ON (c.`id_product` = p.`id_product`)' : '').'
+		WHERE  pac.id_attribute = 21 and  p.id_category_default = '.$idCatDef.' and    pl.`id_lang` = '.(int)($id_lang).
+		($id_category ? ' AND c.`id_category` = '.(int)($id_category) : '').
+		($only_active ? ' AND p.`active` = 1' : '').'
+		ORDER BY pa.price desc'.
+		($limit > 0 ? ' LIMIT '.(int)($start).','.(int)($limit) : '')
+		);
+
+		return ($rq);
+	}   
+        
 	public function getProducts($id_lang, $p, $n, $orderBy = NULL, $orderWay = NULL, $getTotal = false, $active = true, $random = false, $randomNumberProducts = 1, $checkAccess = true)
 	{
 		global $cookie;
