@@ -101,77 +101,8 @@ class productsCategory extends Module
 	
 	public function hookProductFooter($params)
 	{
-		global $smarty, $cookie;
-		
-		$idProduct = (int)(Tools::getValue('id_product'));
-		$product = new Product((int)($idProduct));
-
-		/* If the visitor has came to this product by a category, use this one */
-		if (isset($params['category']->id_category))
-			$category = $params['category'];
-		/* Else, use the default product category */
-		else
-		{
-			if (isset($product->id_category_default) AND $product->id_category_default > 1)
-				$category = New Category((int)($product->id_category_default));
-		}
-		
-		if (!Validate::isLoadedObject($category) OR !$category->active) 
-			return;
-
-		// Get infos
-		$categoryProducts = $category->getProducts((int)($cookie->id_lang), 1, 100); /* 100 products max. */
-		$sizeOfCategoryProducts = (int)sizeof($categoryProducts);
-		$middlePosition = 0;
-		
-		// Remove current product from the list
-		if (is_array($categoryProducts) AND sizeof($categoryProducts))
-		{
-			foreach ($categoryProducts AS $key => $categoryProduct)
-				if ($categoryProduct['id_product'] == $idProduct)
-				{
-					unset($categoryProducts[$key]);
-					break;
-				}
-
-			$taxes = Product::getTaxCalculationMethod();
-			if (Configuration::get('PRODUCTSCATEGORY_DISPLAY_PRICE'))
-				foreach ($categoryProducts AS $key => $categoryProduct)
-					if ($categoryProduct['id_product'] != $idProduct)
-					{
-						if ($taxes == 0 OR $taxes == 2)
-							$categoryProducts[$key]['displayed_price'] = Product::getPriceStatic((int)$categoryProduct['id_product'], true, NULL, 2);
-						elseif ($taxes == 1)
-							$categoryProducts[$key]['displayed_price'] = Product::getPriceStatic((int)$categoryProduct['id_product'], false, NULL, 2);
-					}
-		
-			// Get positions
-			$middlePosition = round($sizeOfCategoryProducts / 2, 0);
-			$productPosition = $this->getCurrentProduct($categoryProducts, (int)$idProduct);
-		
-			// Flip middle product with current product
-			if ($productPosition)
-			{
-				$tmp = $categoryProducts[$middlePosition-1];
-				$categoryProducts[$middlePosition-1] = $categoryProducts[$productPosition];
-				$categoryProducts[$productPosition] = $tmp;
-			}
-		
-			// If products tab higher than 30, slice it
-			if ($sizeOfCategoryProducts > 30)
-			{
-				$categoryProducts = array_slice($categoryProducts, $middlePosition - 15, 30, true);
-				$middlePosition = 15;
-			}
-		}
-		
-		// Display tpl
-		$smarty->assign(array(
-			'categoryProducts' => $categoryProducts,
-			'middlePosition' => (int)$middlePosition,
-			'ProdDisplayPrice' => Configuration::get('PRODUCTSCATEGORY_DISPLAY_PRICE')));
-
-		return $this->display(__FILE__, 'productscategory.tpl');
+                Tools::addCSS($this->_path.'productscategory.css', 'all');
+		Tools::addJS(array($this->_path.'productscategory.js', _PS_JS_DIR_.'jquery/jquery.serialScroll-1.2.2-min.js'));
 	}
 	
 	public function hookHeader($params)
