@@ -2741,7 +2741,7 @@ class ProductCore extends ObjectModel
 		SELECT p.*
 		FROM `'._DB_PREFIX_.'product` p 
                     INNER JOIN '._DB_PREFIX_.'product_lang pl ON p.id_product = pl.id_product
-		WHERE id_product = '.(int)$ro1w['supplier_reference']) as $subrow){
+		WHERE p.id_product = '.(int)$ro1w['supplier_reference']) as $subrow){
 			$row_us['id_category_default'] = $subrow['id_category_default'];
                         $row_us['link_rewrite'] = $subrow['link_rewrite'];
                         $row_us['ean13'] = $subrow['ean13'];
