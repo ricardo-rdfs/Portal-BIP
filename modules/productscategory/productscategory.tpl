@@ -26,7 +26,7 @@
 <div id="mymodule_block_right" class="block">
  <div class="block_content">
 {if count($categoryProducts) > 0 && $categoryProducts !== false}
-	<h2>Productos Relacionados</h2>
+	<p>Productos Relacionados</p>
 	<div id="{if count($categoryProducts) > 5}productscategory{else}productscategory_noscroll{/if}">
 	{if count($categoryProducts) > 5}<a id="productscategory_scroll_left" title="{l s='Previous' mod='productscategory'}" href="javascript:{ldelim}{rdelim}">{l s='Previous' mod='productscategory'}</a>{/if}
 	<div id="productscategory_list">
