@@ -2523,8 +2523,7 @@ OR
 )  ';
 					$sqlQuery['group'] = ' GROUP BY p.id_product ';
                                         
-                                        echo $sqlQuery['select']."\n".$sqlQuery['from']."\n".$sqlQuery['join']."\n".$sqlQuery['where']."\n".$sqlQuery['group'];
-                                    }else{
+                                       }else{
 
 					if($usado==true){
                                             
