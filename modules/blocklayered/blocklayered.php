@@ -1920,9 +1920,9 @@ class BlockLayered extends Module
                 
                 $descrypt_reg = "";
                 //echo var_dump($tmp_lett);
-                $wLikeArr=explode(" ",$whereLikeFilter); 
+                $wLikeArr=explode(" ",ltrim(rtrim($whereLikeFilter))); 
                 
-		if($wLikeArr[0]!="" /*or !in_array($wLikeArr[0],$tmp_lett)*/)
+		if($wLikeArr[0]!="" /*or !in_array($wLikeArr[0],$tmp_lett)*/){
                     $descrypt_reg = ' pl.description REGEXP "[[:<:]]'.$wLikeArr[0].'[[:>:]]" ';
                 
                 if($wLikeArr[1]!="" /*or !in_array($wLikeArr[1],$tmp_lett)*/)
@@ -1933,6 +1933,7 @@ class BlockLayered extends Module
                 
                 if($wLikeArr[3]!="" /*or !in_array($wLikeArr[3],$tmp_lett)*/)
                     $descrypt_reg = ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[3].'[[:>:]]" ';
+                }
 
                 
 		$parent = new Category((int)$id_parent);
@@ -2399,9 +2400,9 @@ OR
 		
                 $descrypt_reg = "";
                 //echo var_dump($tmp_lett);
-                $wLikeArr=explode(" ",$whereLikeFilter); 
+                $wLikeArr=explode(" ",ltrim(rtrim($whereLikeFilter))); 
                 
-		if($wLikeArr[0]!="" /*or !in_array($wLikeArr[0],$tmp_lett)*/)
+		if($wLikeArr[0]!="" /*or !in_array($wLikeArr[0],$tmp_lett)*/){
                     $descrypt_reg = ' pl.description REGEXP "[[:<:]]'.$wLikeArr[0].'[[:>:]]" ';
                 
                 if($wLikeArr[1]!="" /*or !in_array($wLikeArr[1],$tmp_lett)*/)
@@ -2412,7 +2413,7 @@ OR
                 
                 if($wLikeArr[3]!="" /*or !in_array($wLikeArr[3],$tmp_lett)*/)
                     $descrypt_reg = ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[3].'[[:>:]]" ';
-               
+                }
                 
 		/* Get the filters for the current category */
 		$filters = Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('SELECT * FROM '._DB_PREFIX_.'layered_category WHERE id_category = '.(int)$id_parent.'
