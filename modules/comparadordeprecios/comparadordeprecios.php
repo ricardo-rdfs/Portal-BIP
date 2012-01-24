@@ -1,5 +1,6 @@
 <?php
 
+
 if (!defined('_PS_VERSION_'))
 	exit;
 
@@ -108,7 +109,7 @@ class ComparadorDePrecios extends Module
 			if (empty($_POST['dacoURL']) OR empty($_POST['dacoURL']))
 				$error = $this->l('Debes completar todos los campos.');
 			elseif (empty($_POST['dacoEmail']) OR !Validate::isEmail($_POST['dacoEmail']))
-				$error = $this->l('El email ingresado es invÃ¡lido.');
+				$error = $this->l('El email ingresado es inválido.');
 			elseif (!isset($_POST['dacoUsuario']) OR !isset($_POST['dacoBip']) OR !is_numeric($_POST['dacoBip']))
 				$error = $this->l('Ha ocurrido un error durante el proceso.');
 			else{
@@ -189,7 +190,7 @@ class ComparadorDePrecios extends Module
 
 	public function hookProductTab($params)
     {
-		return '<li><a href="#idTab59999" class="idTabHrefShort">Compara precios</a></li>';
+		return '<li><a href="#idTab59999" class="idTabHrefShort">Compara en otra tienda</a></li>';
 	}
 	
 	public function hookProductTabContent($params)
@@ -212,13 +213,13 @@ class ComparadorDePrecios extends Module
 		ORDER BY dacoTienda ASC ";
 		$resultComparacion = Db::getInstance()->ExecuteS($queryComparacion);
 		
-		$output = '<div id="idTab59999"><table width="400" border="0" cellspacing="0" cellpadding="2" style="border:1px solid #CCC;"><tr style="background-color:#FFFFCC;"><td style="font-weight:bold">Tienda</td><td style="font-weight:bold">Precio</td><td style="font-weight:bold">Tipo de Precio</td><td style="font-weight:bold">Forma de Pago</td></tr>';
+		$output = '<div id="idTab59999"><table>';
 		foreach($resultComparacion as $linea){
-			$output.= '<tr><td>'.$linea["dacoTienda"].'</td><td>$'.number_format($linea["dacoPrecioComparacion"],0,',','.').'</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
+			$output.= '<tr><td>'.$linea["dacoTienda"].'</td><td>$'.number_format($linea["dacoPrecioComparacion"],0,',','.').'</td></tr>';
 		}
 		$output.= '</table></div>';
 		return $output;
 	}
 
 		
-}		
+}
