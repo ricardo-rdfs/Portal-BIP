@@ -1917,17 +1917,22 @@ class BlockLayered extends Module
 
                 }
                 $tmp_lett = explode('|', $row_us['letters']);
+                
+                $descrypt_reg = "";
                 //echo var_dump($tmp_lett);
                 $wLikeArr=explode(" ",$whereLikeFilter); 
                 
-		if($wLikeArr[0]=="" /*or !in_array($wLikeArr[0],$tmp_lett)*/)
-                    $wLikeArr[0] = '';
-                if($wLikeArr[1]=="" /*or !in_array($wLikeArr[1],$tmp_lett)*/)
-                    $wLikeArr[1] = '';
-                if($wLikeArr[2]=="" /*or !in_array($wLikeArr[2],$tmp_lett)*/)
-                    $wLikeArr[2] = '';
-                if($wLikeArr[3]=="" /*or !in_array($wLikeArr[3],$tmp_lett)*/)
-                    $wLikeArr[3] = '';
+		if($wLikeArr[0]!="" /*or !in_array($wLikeArr[0],$tmp_lett)*/)
+                    $descrypt_reg = ' pl.description REGEXP "[[:<:]]'.$wLikeArr[0].'[[:>:]]" ';
+                
+                if($wLikeArr[1]!="" /*or !in_array($wLikeArr[1],$tmp_lett)*/)
+                    $descrypt_reg = ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[1].'[[:>:]]" ';
+                
+                if($wLikeArr[2]!="" /*or !in_array($wLikeArr[2],$tmp_lett)*/)
+                    $descrypt_reg = ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[2].'[[:>:]]" ';
+                
+                if($wLikeArr[3]!="" /*or !in_array($wLikeArr[3],$tmp_lett)*/)
+                    $descrypt_reg = ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[3].'[[:>:]]" ';
 
                 
 		$parent = new Category((int)$id_parent);
@@ -2069,7 +2074,7 @@ class BlockLayered extends Module
                     WHERE 1 '.$queryFiltersWhere.' 
                     AND (
 (
-pl.description REGEXP "[[:<:]]'.$wLikeArr[0].'[[:>:]]" AND pl.description REGEXP "[[:<:]]'.$wLikeArr[1].'[[:>:]]"  AND  pl.description REGEXP "[[:<:]]'.$wLikeArr[2].'[[:>:]]" AND  pl.description REGEXP "[[:<:]]'.$wLikeArr[3].'[[:>:]]"
+'.$descrypt_reg.'
 ) 
 OR 
 (p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
@@ -2088,7 +2093,7 @@ OR
                     WHERE 1 '.$queryFiltersWhere.'  
                     AND (
 (
-pl.description REGEXP "[[:<:]]'.$wLikeArr[0].'[[:>:]]" AND pl.description REGEXP "[[:<:]]'.$wLikeArr[1].'[[:>:]]"  AND  pl.description REGEXP "[[:<:]]'.$wLikeArr[2].'[[:>:]]" AND  pl.description REGEXP "[[:<:]]'.$wLikeArr[3].'[[:>:]]"
+'.$descrypt_reg.'
 ) 
 OR 
 (p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
@@ -2167,7 +2172,7 @@ OR
 			LEFT JOIN '._DB_PREFIX_.'manufacturer m ON (m.id_manufacturer = p.id_manufacturer)
 			WHERE p.`active` = 1 AND  pl.id_lang = '.(int)$cookie->id_lang.'  AND (
 (
-pl.description REGEXP "[[:<:]]'.$wLikeArr[0].'[[:>:]]" AND pl.description REGEXP "[[:<:]]'.$wLikeArr[1].'[[:>:]]"  AND  pl.description REGEXP "[[:<:]]'.$wLikeArr[2].'[[:>:]]" AND  pl.description REGEXP "[[:<:]]'.$wLikeArr[3].'[[:>:]]"
+'.$descrypt_reg.'
 ) 
 OR 
 (p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
@@ -2391,17 +2396,22 @@ OR
                 }
 		$parent = new Category((int)$id_parent);
                 
-                $wLikeArr=explode(" ",$whereLikeFilter); 
 		
-		if($wLikeArr[0]=="" /*or !in_array($wLikeArr[0],$tmp_lett)*/)
-                    $wLikeArr[0] = '';
-                if($wLikeArr[1]=="" /*or !in_array($wLikeArr[1],$tmp_lett)*/)
-                    $wLikeArr[1] = '';
-                if($wLikeArr[2]=="" /*or !in_array($wLikeArr[2],$tmp_lett)*/)
-                    $wLikeArr[2] = '';
-                if($wLikeArr[3]=="" /*or !in_array($wLikeArr[3],$tmp_lett)*/)
-                    $wLikeArr[3] = '';
-
+                $descrypt_reg = "";
+                //echo var_dump($tmp_lett);
+                $wLikeArr=explode(" ",$whereLikeFilter); 
+                
+		if($wLikeArr[0]!="" /*or !in_array($wLikeArr[0],$tmp_lett)*/)
+                    $descrypt_reg = ' pl.description REGEXP "[[:<:]]'.$wLikeArr[0].'[[:>:]]" ';
+                
+                if($wLikeArr[1]!="" /*or !in_array($wLikeArr[1],$tmp_lett)*/)
+                    $descrypt_reg = ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[1].'[[:>:]]" ';
+                
+                if($wLikeArr[2]!="" /*or !in_array($wLikeArr[2],$tmp_lett)*/)
+                    $descrypt_reg = ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[2].'[[:>:]]" ';
+                
+                if($wLikeArr[3]!="" /*or !in_array($wLikeArr[3],$tmp_lett)*/)
+                    $descrypt_reg = ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[3].'[[:>:]]" ';
                
                 
 		/* Get the filters for the current category */
@@ -2503,7 +2513,7 @@ OR
                                         
 					$sqlQuery['where'] = 'WHERE p.`active` = 1 and (
 (
-pl.description REGEXP "[[:<:]]'.$wLikeArr[0].'[[:>:]]" AND pl.description REGEXP "[[:<:]]'.$wLikeArr[1].'[[:>:]]"  AND  pl.description REGEXP "[[:<:]]'.$wLikeArr[2].'[[:>:]]" AND  pl.description REGEXP "[[:<:]]'.$wLikeArr[3].'[[:>:]]"
+'.$descrypt_reg.'
 ) 
 OR 
 (p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
@@ -2565,7 +2575,7 @@ OR
 					$sqlQuery['where'] = '
 					WHERE (
 (
-pl.description REGEXP "[[:<:]]'.$wLikeArr[0].'[[:>:]]" AND pl.description REGEXP "[[:<:]]'.$wLikeArr[1].'[[:>:]]"  AND  pl.description REGEXP "[[:<:]]'.$wLikeArr[2].'[[:>:]]" AND  pl.description REGEXP "[[:<:]]'.$wLikeArr[3].'[[:>:]]"
+'.$descrypt_reg.'
 ) 
 OR 
 (p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
@@ -2630,7 +2640,7 @@ OR
 					$sqlQuery['where'] = 'WHERE a.id_attribute_group = '.(int)$filter['id_value'].'
 					AND (
 (
-pl.description REGEXP "[[:<:]]'.$wLikeArr[0].'[[:>:]]" AND pl.description REGEXP "[[:<:]]'.$wLikeArr[1].'[[:>:]]"  AND  pl.description REGEXP "[[:<:]]'.$wLikeArr[2].'[[:>:]]" AND  pl.description REGEXP "[[:<:]]'.$wLikeArr[3].'[[:>:]]"
+'.$descrypt_reg.'
 ) 
 OR 
 (p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
@@ -2734,11 +2744,15 @@ OR
 					LEFT JOIN '._DB_PREFIX_.'layered_indexable_feature_value_lang_value lifvl
 					ON (lifvl.id_feature_value = fp.id_feature_value AND lifvl.id_lang = '.(int)$cookie->id_lang.') ';
 					$sqlQuery['where'] = 'WHERE p.`active` = 1 AND fp.id_feature = '.(int)$filter['id_value'].'
-					AND ((pl.description like "%'.$wLikeArr[0].'%" AND pl.description like "%'.$wLikeArr[1].'%"  AND  pl.description like "%'.$wLikeArr[2].'%" AND  pl.description like "%'.$wLikeArr[3].'%") 
+					AND (
+(
+'.$descrypt_reg.'
+) 
 OR 
 (p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
 OR
-(cl.name LIKE  "%'.$whereLikeFilter.'%"))  AND p.id_product IN (
+(cl.name REGEXP "[[:<:]]'.$whereLikeFilter.'[[:>:]]")
+)  AND p.id_product IN (
 					SELECT id_product
 					FROM '._DB_PREFIX_.'category_product cp
 					INNER JOIN '._DB_PREFIX_.'category c ON (c.id_category = cp.id_category)) ';
@@ -2813,7 +2827,7 @@ OR
                                         
                                         $sqlQuery['where'] = ' WHERE cp.id_category = c.id_category and (
 (
-pl.description REGEXP "[[:<:]]'.$wLikeArr[0].'[[:>:]]" AND pl.description REGEXP "[[:<:]]'.$wLikeArr[1].'[[:>:]]"  AND  pl.description REGEXP "[[:<:]]'.$wLikeArr[2].'[[:>:]]" AND  pl.description REGEXP "[[:<:]]'.$wLikeArr[3].'[[:>:]]"
+'.$descrypt_reg.'
 ) 
 OR 
 (p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
@@ -2829,7 +2843,7 @@ OR
                                             LEFT JOIN '._DB_PREFIX_.'product_lang pl ON (pl.id_product = p.id_product) 
                                             WHERE cp.id_category = c.id_category and (
 (
-pl.description REGEXP "[[:<:]]'.$wLikeArr[0].'[[:>:]]" AND pl.description REGEXP "[[:<:]]'.$wLikeArr[1].'[[:>:]]"  AND  pl.description REGEXP "[[:<:]]'.$wLikeArr[2].'[[:>:]]" AND  pl.description REGEXP "[[:<:]]'.$wLikeArr[3].'[[:>:]]"
+'.$descrypt_reg.'
 ) 
 OR 
 (p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
