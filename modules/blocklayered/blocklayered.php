@@ -1926,13 +1926,13 @@ class BlockLayered extends Module
                     $descrypt_reg = ' pl.description REGEXP "[[:<:]]'.$wLikeArr[0].'[[:>:]]" ';
                 
                 if($wLikeArr[1]!="" /*or !in_array($wLikeArr[1],$tmp_lett)*/)
-                    $descrypt_reg = ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[1].'[[:>:]]" ';
+                    $descrypt_reg .= ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[1].'[[:>:]]" ';
                 
                 if($wLikeArr[2]!="" /*or !in_array($wLikeArr[2],$tmp_lett)*/)
-                    $descrypt_reg = ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[2].'[[:>:]]" ';
+                    $descrypt_reg .= ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[2].'[[:>:]]" ';
                 
                 if($wLikeArr[3]!="" /*or !in_array($wLikeArr[3],$tmp_lett)*/)
-                    $descrypt_reg = ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[3].'[[:>:]]" ';
+                    $descrypt_reg .= ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[3].'[[:>:]]" ';
                 }
 
                 
@@ -2406,15 +2406,15 @@ OR
                     $descrypt_reg = ' pl.description REGEXP "[[:<:]]'.$wLikeArr[0].'[[:>:]]" ';
                 
                 if($wLikeArr[1]!="" /*or !in_array($wLikeArr[1],$tmp_lett)*/)
-                    $descrypt_reg = ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[1].'[[:>:]]" ';
+                    $descrypt_reg .= ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[1].'[[:>:]]" ';
                 
                 if($wLikeArr[2]!="" /*or !in_array($wLikeArr[2],$tmp_lett)*/)
-                    $descrypt_reg = ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[2].'[[:>:]]" ';
+                    $descrypt_reg .= ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[2].'[[:>:]]" ';
                 
                 if($wLikeArr[3]!="" /*or !in_array($wLikeArr[3],$tmp_lett)*/)
-                    $descrypt_reg = ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[3].'[[:>:]]" ';
+                    $descrypt_reg .= ' AND pl.description REGEXP "[[:<:]]'.$wLikeArr[3].'[[:>:]]" ';
                 }
-                
+
 		/* Get the filters for the current category */
 		$filters = Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('SELECT * FROM '._DB_PREFIX_.'layered_category WHERE id_category = '.(int)$id_parent.'
 		GROUP BY `type`, id_value ORDER BY position ASC');
