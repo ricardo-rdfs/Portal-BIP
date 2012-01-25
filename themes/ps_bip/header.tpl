@@ -223,13 +223,10 @@ $('#our_price_display_distribuidor').hide();
 {$urlsCat[364]}
 {$urlsCat[365]}
 {$urlsCat[366]}
-        {foreach from=$idcat key=idcat item=numcat}
-{$numcat}
-{$urlsCat[$numcat]}
-            
 
-
-	{/foreach}
+{foreach from=$idcat item=categ name=idcat}
+#{$categ}
+{/foreach}
 
   </ul>
 </div>
