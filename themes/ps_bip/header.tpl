@@ -220,12 +220,10 @@ $('#our_price_display_distribuidor').hide();
 </div>
 <div class="mainCategoryLinks">
   <ul class="inlineMenu">
-{$urlsCat[364]}
-{$urlsCat[365]}
-{$urlsCat[366]}
+
 
 {foreach from=$idcat item=categ name=idcat}
-#{$categ}
+{$urlsCat[$categ]}
 {/foreach}
 
   </ul>
