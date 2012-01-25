@@ -26,8 +26,8 @@
 
 {if isset($products)}
 	<!-- Products list -->
-	<script type="text/javascript" src="js/jquery/jquery.fancybox-1.3.4.js"></script>
-	<link href="css/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" media="screen" />
+	<script type="text/javascript" src="http://demo.exe.cl/exeBIPdev/js/jquery/jquery.fancybox-1.3.4.js"></script>
+	<link href="http://demo.exe.cl/exeBIPdev/css/jquery.fancybox-1.3.4.css" rel="stylesheet" type="text/css" media="screen" />
 	<ul id="product_list" class="clear">
 	{foreach from=$products item=product name=products}
 		<li class="ajax_block_product {if $smarty.foreach.products.first}first_item{elseif $smarty.foreach.products.last}last_item{/if} {if $smarty.foreach.products.index % 2}alternate_item{else}item{/if} clearfix">
