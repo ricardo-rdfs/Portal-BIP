@@ -220,14 +220,15 @@ $('#our_price_display_distribuidor').hide();
 </div>
 <div class="mainCategoryLinks">
   <ul class="inlineMenu">
-    <li class="n1"><a href="{$base_dir}364-computadores" name="Computadores" target="_self" id="Computadores"><span>Computadores</span></a></li>
-    <li class="n2"><a href="{$base_dir}365-desktop" name="Desktop" target="_self" id="Desktop"><span>Desktop</span></a></li>
-    <li class="n3"><a href="{$base_dir}366-fotografia-camaras" name="Fotografia / Camaras" target="_self" id="Fotografia / Camaras"><span>Fotograf&iacute;a / C&aacute;maras</span></a></li>
-    <li class="n4"><a href="{$base_dir}367-conectividad" name="Conectividad" target="_self" id="Conectividad"><span>Conectividad</span></a></li>
-    <li class="n5"><a href="{$base_dir}368-productividad-empresas" name="Productividad y Empresas" target="_self" id="Productividad y Empresas"><span>Productividad &amp; Empresas</span></a></li>
-    <li class="n6"><a href="{$base_dir}369-video-display" name="Video / Display" target="_self" id="Video / Display"><span>Video / Display</span></a></li>
-    <li class="n7"><a href="{$base_dir}370-seguridad" name="Seguridad" target="_self" id="Seguridad"><span>Seguridad</span></a></li>
-    <li class="n8"><a href="{$base_dir}371-otros" name="Otros" target="_self" id="Otros"><span>Otros</span></a></li>
+
+        {foreach from=$idcat key=idcat item=numcat}
+{$numcat}
+{$urlsCat[$numcat]}
+            
+
+
+	{/foreach}
+
   </ul>
 </div>
 <!--END mainCategoryLinks -->

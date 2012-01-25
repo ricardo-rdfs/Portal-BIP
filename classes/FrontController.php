@@ -460,11 +460,29 @@ class FrontControllerCore
 		if (!self::$initialized)
 			$this->init();
 
+                foreach (Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('
+                SELECT id_category FROM `'._DB_PREFIX_.'category` WHERE `id_category`>=364 AND `id_category`<=371 ORDER BY 
+                `position` asc') as $catlevl)
+			$idcat[] = $catlevl['id_category'];
+                
+                $urlsCat[364]='<li class="n1"><a href="'._PS_BASE_URL_.__PS_BASE_URI__.'364-computadores" name="Computadores" target="_self" id="Computadores"><span>Computadores</span></a></li>';
+                $urlsCat[365]='<li class="n2"><a href="'._PS_BASE_URL_.__PS_BASE_URI__.'365-desktop" name="Desktop" target="_self" id="Desktop"><span>Desktop</span></a></li>';
+                $urlsCat[366]='<li class="n3"><a href="'._PS_BASE_URL_.__PS_BASE_URI__.'366-fotografia-camaras" name="Fotografia / Camaras" target="_self" id="Fotografia / Camaras"><span>Fotograf&iacute;a / C&aacute;maras</span></a></li>';
+                $urlsCat[367]='<li class="n4"><a href="'._PS_BASE_URL_.__PS_BASE_URI__.'367-conectividad" name="Conectividad" target="_self" id="Conectividad"><span>Conectividad</span></a></li>';
+                $urlsCat[368]='<li class="n5"><a href="'._PS_BASE_URL_.__PS_BASE_URI__.'368-productividad-empresas" name="Productividad y Empresas" target="_self" id="Productividad y Empresas"><span>Productividad &amp; Empresas</span></a></li>';
+                $urlsCat[369]='<li class="n6"><a href="'._PS_BASE_URL_.__PS_BASE_URI__.'369-video-display" name="Video / Display" target="_self" id="Video / Display"><span>Video / Display</span></a></li>';
+                $urlsCat[370]='<li class="n7"><a href="'._PS_BASE_URL_.__PS_BASE_URI__.'370-seguridad" name="Seguridad" target="_self" id="Seguridad"><span>Seguridad</span></a></li>';
+                $urlsCat[371]='<li class="n8"><a href="'._PS_BASE_URL_.__PS_BASE_URI__.'371-otros" name="Otros" target="_self" id="Otros"><span>Otros</span></a></li>';
+
+                
+                
 		// P3P Policies (http://www.w3.org/TR/2002/REC-P3P-20020416/#compact_policies)
 		header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
 
 		/* Hooks are volontary out the initialize array (need those variables already assigned) */
 		self::$smarty->assign(array(
+                        'idcat'=>$idcat,
+                        'urlsCat'=>$urlsCat,
 			'time' => time(),
 			'img_update_time' => Configuration::get('PS_IMG_UPDATE_TIME'),
 			'static_token' => Tools::getToken(false),
