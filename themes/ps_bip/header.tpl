@@ -220,7 +220,7 @@ $('#our_price_display_distribuidor').hide();
 </div>
 <div class="mainCategoryLinks">
   <ul class="inlineMenu">
-
+ok::{$oka}
         {foreach from=$idcat key=idcat item=numcat}
 {$numcat}
 {$urlsCat[$numcat]}

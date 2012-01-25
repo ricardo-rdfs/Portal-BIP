@@ -483,6 +483,7 @@ class FrontControllerCore
 		self::$smarty->assign(array(
                         'idcat'=>$idcat,
                         'urlsCat'=>$urlsCat,
+                        'oka'=>'asdddddd',
 			'time' => time(),
 			'img_update_time' => Configuration::get('PS_IMG_UPDATE_TIME'),
 			'static_token' => Tools::getToken(false),
