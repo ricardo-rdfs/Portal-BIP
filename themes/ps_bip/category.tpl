@@ -39,7 +39,7 @@
 				{$category->name|escape:'htmlall':'UTF-8'}
 				{$categoryNameComplement|escape:'htmlall':'UTF-8'}
 				<span class="category-product-count">
-					{if $category->level_depth != 1}c:{include file="$tpl_dir./category-count.tpl"}{/if}
+					
 {include file="$tpl_dir./category-count.tpl"}
                                        
 				</span>
