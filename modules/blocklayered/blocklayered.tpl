@@ -83,9 +83,9 @@ Limpiar filtros <input type="checkbox" class="checkbox" name="clean_all_10" id="
 						{/if}
 						<span class="layered_subtitle">{$filter.name|escape:html:'UTF-8'}</span>
                                                 
-						<span class="layered_close"><a href="#" rel="ul_layered_{$filter.type}_{$filter.id_key}">v</a></span>
+						<span class="layered_close"><a href="#" rel="ul_layered_{$filter.type}_{$filter.id_key}">&lt;</a></span>
 						<div class="clear"></div>
-						<ul id="ul_layered_{$filter.type}_{$filter.id_key}">
+						<ul id="ul_layered_{$filter.type}_{$filter.id_key}" style="display: none;">
                                                 
 						{if !isset($filter.slider)}
 							{foreach from=$filter.values key=id_value item=value}
