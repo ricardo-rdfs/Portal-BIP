@@ -526,7 +526,7 @@ class CategoryCore extends ObjectModel
                 pa.price >='.(int)$pPrice.' ORDER BY pa.price ASC LIMIT 5') as $subrow){
 			$pMax[] = $subrow['id_product'];
                 }    
-                echo var_dump($pMax);
+                
                 if(count($pMax)<5){
                     foreach (Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('
                     SELECT pa.price,p.id_product
@@ -540,7 +540,7 @@ class CategoryCore extends ObjectModel
                     }     
                 }
                 echo '<br>';
-                echo var_dump($pMax);
+                
 
 
 		$rq = Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('
