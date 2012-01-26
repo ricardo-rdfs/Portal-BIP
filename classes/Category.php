@@ -534,7 +534,7 @@ class CategoryCore extends ObjectModel
                     INNER JOIN '._DB_PREFIX_.'product_attribute_combination pac ON (pa.id_product_attribute = pac.id_product_attribute)
                     WHERE 
                     pac.id_attribute = 21 AND p.`active` = 1 AND p.id_category_default='.$idCatDef.' AND p.id_product<>'.$idProduct.' AND
-                    pa.price <='.(int)$pPrice.' ORDER BY pa.price ASC LIMIT 0,'.(6-count($pMax)).'') as $subrow){
+                    pa.price <='.(int)$pPrice.' ORDER BY pa.price DESC LIMIT 0,'.(6-count($pMax)).'') as $subrow){
                             $pMax[] = $subrow['id_product'];
                     }     
                 }
