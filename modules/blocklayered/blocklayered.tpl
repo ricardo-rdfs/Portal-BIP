@@ -83,12 +83,7 @@ Limpiar filtros <input type="checkbox" class="checkbox" name="clean_all_10" id="
 						{/if}
 						<span class="layered_subtitle">{$filter.name|escape:html:'UTF-8'}</span>
                                                 
-{if $filter.type=='price'}						<span class="layered_close"><a href="#" rel="ul_layered_{$filter.type}_{$filter.id_key}">
-v
-{else}
-&lt;
-{/if}
-</a></span>
+						<span class="layered_close"><a href="#" rel="ul_layered_{$filter.type}_{$filter.id_key}">{if $filter.type != 'price'}&lt;{else}v{/if}</a></span>
 						<div class="clear"></div>
 						<ul id="ul_layered_{$filter.type}_{$filter.id_key}" {if $filter.type != 'price'} style="display: none;"{/if}>
                                                 
