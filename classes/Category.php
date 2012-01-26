@@ -539,6 +539,7 @@ class CategoryCore extends ObjectModel
                             $pMax[] = $subrow['id_product'];
                     }     
                 }
+                echo '<br>';
                 echo var_dump($pMax);
 
 
@@ -562,8 +563,7 @@ class CategoryCore extends ObjectModel
 		WHERE pac.id_attribute = 21 and  
                 p.id_product IN ('.implode(',', $pMax).')
                 AND p.`active` = 1 AND p.id_product<>'.$idProduct.'
-                ORDER BY pa.price desc'.    
-		($limit > 0 ? ' LIMIT '.(int)($start).','.(int)($limit) : '')
+                ORDER BY pa.price desc'
 		);
 
                 	/* Modify SQL result */
