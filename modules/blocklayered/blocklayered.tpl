@@ -90,14 +90,7 @@ v
 {/if}
 </a></span>
 						<div class="clear"></div>
-						<ul id="ul_layered_{$filter.type}_{$filter.id_key}" 
-
-{if $filter.type ne 'price'}						<span class="layered_close"><a href="#" rel="ul_layered_{$filter.type}_{$filter.id_key}">
-style="display: none;"
-{/if}
-
-
->
+						<ul id="ul_layered_{$filter.type}_{$filter.id_key}" {if $filter.type != 'price'} style="display: none;"{/if}>
                                                 
 						{if !isset($filter.slider)}
 							{foreach from=$filter.values key=id_value item=value}
