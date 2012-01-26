@@ -496,7 +496,7 @@ class CategoryCore extends ObjectModel
 //mbj
 	public static function getProductsRelacionados($id_lang, $start, $limit, $idProduct)
 	{
-global $cookie;
+             global $cookie;
              foreach (Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('
 		SELECT p.id_category_default
 		FROM `'._DB_PREFIX_.'product` p 
@@ -504,7 +504,40 @@ global $cookie;
 			$idCatDef = $subrow['id_category_default'];
                 }    
 
-                
+             foreach (Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('
+		SELECT pa.price
+		FROM `'._DB_PREFIX_.'product` p 
+		INNER JOIN `'._DB_PREFIX_.'product_attribute` pa ON (p.`id_product` = pa.`id_product`)
+                INNER JOIN '._DB_PREFIX_.'product_attribute_combination pac ON (pa.id_product_attribute = pac.id_product_attribute)
+		WHERE 
+                pac.id_attribute = 21 AND p.`active` = 1 AND
+                p.id_product = '.(int)$idProduct) as $subrow){
+			$pPrice = $subrow['price'];
+                }    
+
+                $pMax = array();
+                foreach (Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('
+		SELECT pa.price,p.id_product
+		FROM `'._DB_PREFIX_.'product` p 
+		INNER JOIN `'._DB_PREFIX_.'product_attribute` pa ON (p.`id_product` = pa.`id_product`)
+                INNER JOIN '._DB_PREFIX_.'product_attribute_combination pac ON (pa.id_product_attribute = pac.id_product_attribute)
+		WHERE 
+                pac.id_attribute = 21 AND p.`active` = 1 AND p.id_category_default='.$idCatDef.' AND p.id_product<>'.$idProduct.' AND
+                pa.price >='.(int)$pPrice.' LIMIT 0,5') as $subrow){
+			$pMax[] = $subrow['id_product'];
+                }    
+                if(count($pMax)<5){
+                    foreach (Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('
+                    SELECT pa.price,p.id_product
+                    FROM `'._DB_PREFIX_.'product` p 
+                    INNER JOIN `'._DB_PREFIX_.'product_attribute` pa ON (p.`id_product` = pa.`id_product`)
+                    INNER JOIN '._DB_PREFIX_.'product_attribute_combination pac ON (pa.id_product_attribute = pac.id_product_attribute)
+                    WHERE 
+                    pac.id_attribute = 21 AND p.`active` = 1 AND p.id_category_default='.$idCatDef.' AND p.id_product<>'.$idProduct.' AND
+                    pa.price <='.(int)$pPrice.' LIMIT 0,'.(5-count($pMax)).'') as $subrow){
+                            $pMax[] = $subrow['id_product'];
+                    }     
+                }
 
 
 		$rq = Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('
@@ -521,10 +554,12 @@ global $cookie;
 		LEFT JOIN `'._DB_PREFIX_.'tax_rule` tr ON (p.`id_tax_rules_group` = tr.`id_tax_rules_group`
 		                                           AND tr.`id_country` = '.(int)Country::getDefaultCountryId().'
 	                                           	   AND tr.`id_state` = 0)
-	    LEFT JOIN `'._DB_PREFIX_.'tax` t ON (t.`id_tax` = tr.`id_tax`)
+	        LEFT JOIN `'._DB_PREFIX_.'tax` t ON (t.`id_tax` = tr.`id_tax`)
 		LEFT JOIN `'._DB_PREFIX_.'tax_lang` tl ON (t.`id_tax` = tl.`id_tax` AND tl.`id_lang` = '.(int)($id_lang).')
 		LEFT JOIN `'._DB_PREFIX_.'manufacturer` m ON m.`id_manufacturer` = p.`id_manufacturer`
-		WHERE pac.id_attribute = 21 and  p.id_category_default = '.$idCatDef.' AND p.`active` = 1 AND p.id_product<>'.$idProduct.'
+		WHERE pac.id_attribute = 21 and  
+                p.id_product IN ('.implode(',', $pMax).')
+                AND p.`active` = 1 AND p.id_product<>'.$idProduct.'
                 ORDER BY pa.price desc'.    
 		($limit > 0 ? ' LIMIT '.(int)($start).','.(int)($limit) : '')
 		);
