@@ -39,8 +39,8 @@ current_friendly_url = '#{$current_friendly_url}';
 				{if isset($selected_filters) && $n_filters > 0}
 				<div id="enabled_filters">
 					<span class="layered_subtitle" style="float: none;">{l s='Enabled filters:' mod='blocklayered'}</span>
-Limpiar filtros <!-- <input type="checkbox" class="checkbox" name="clean_all_10" id="clean_all_10" /> --> 					
-<input type="image" src="ruta_de_acceso" width="15" height="15" class="checkbox" name="clean_all_10" id="clean_all_10" value="asd" /> 
+Limpiar filtros  <input type="checkbox" class="checkboxST" name="clean_all_10" id="clean_all_10" /> 					
+
 
 <ul>
 					{foreach from=$selected_filters key=filter_type item=filter_values}
