@@ -539,7 +539,6 @@ class CategoryCore extends ObjectModel
                             $pMax[] = $subrow['id_product'];
                     }     
                 }
-                echo '<br>';
                 
 
 

@@ -2043,6 +2043,8 @@ class BlockLayered extends Module
 			}
 		}
 
+                echo Tools::getProductsOrder('way', Tools::getValue('orderway')).'<br>';
+                
 		$idCurrency = Currency::getCurrent()->id;
 		$priceFilterQueryIn = ''; // All products with price range between price filters limits
 		$priceFilterQueryOut = ''; // All products with a price filters limit on it price range
