@@ -2042,8 +2042,19 @@ class BlockLayered extends Module
 				break;
 			}
 		}
-                echo Tools::getProductsOrder('by', Tools::getValue('orderby'), true).'<br>';
-                echo Tools::getProductsOrder('way', Tools::getValue('orderway')).'<br>';
+
+                $Oway = '';
+                $Oby = '';
+                
+                if(Tools::getProductsOrder('by', Tools::getValue('orderby'), true) == 'position' && Tools::getProductsOrder('way', Tools::getValue('orderway'))=='asc'){
+                    $Oway = '';
+                    $Oby = '';
+                }else{
+                    $Oway = Tools::getProductsOrder('way', Tools::getValue('orderway'));
+                    $Oby = Tools::getProductsOrder('by', Tools::getValue('orderby'), true);
+                }
+                
+                
                 
 		$idCurrency = Currency::getCurrent()->id;
 		$priceFilterQueryIn = ''; // All products with price range between price filters limits
