@@ -36,9 +36,9 @@ jQuery(document).ready(function() {
 <script>
 function mano(a) {
 	if (navigator.appName=="Netscape") {
-		a.style.cursor=\'pointer\';
+		a.style.cursor='pointer';
 	} else {
-		a.style.cursor=\'hand\';
+		a.style.cursor='hand';
 	}
 }
 </script>
