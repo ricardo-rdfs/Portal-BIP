@@ -2042,7 +2042,7 @@ class BlockLayered extends Module
 				break;
 			}
 		}
-
+                echo Tools::getProductsOrder('by', Tools::getValue('orderby'), true).'<br>';
                 echo Tools::getProductsOrder('way', Tools::getValue('orderway')).'<br>';
                 
 		$idCurrency = Currency::getCurrent()->id;
