@@ -58,7 +58,7 @@ current_friendly_url = '#{$current_friendly_url}';
 				{if isset($selected_filters) && $n_filters > 0}
 				<div id="enabled_filters">
 					<span class="layered_subtitle" style="float: none;">{l s='Enabled filters:' mod='blocklayered'}</span>
-<label for="clean_all_10" onMouseOver="mano(this)" class="heading">Limpiar filtros <span id="redX">x</span> </label> <input type="checkbox" class="checkbox" name="clean_all_10" id="clean_all_10" style="display: none;" /> 					
+<label for="clean_all_10" ><p onMouseOver="mano(this);" class="heading">Limpiar filtros <span id="redX">x</span></p> </label> <input type="checkbox" class="checkbox" name="clean_all_10" id="clean_all_10" style="display: none;" /> 					
 
 
 
