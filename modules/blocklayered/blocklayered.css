@@ -43,6 +43,11 @@
 	color: red;
 }
 
+#redX {
+	text-decoration: none;
+	color: red;
+}
+
 #layered_block_left ul li:hover {
 	background: #71BF47;
 	color: #FFF;

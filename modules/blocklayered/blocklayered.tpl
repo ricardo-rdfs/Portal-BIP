@@ -23,6 +23,25 @@
 *  @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
 *  International Registred Trademark & Property of PrestaShop SA
 *}
+<script type="text/javascript">
+jQuery(document).ready(function() {
+  jQuery(".content").hide();
+  //toggle the componenet with class msg_body
+  jQuery(".heading").click(function()
+  {
+    jQuery(this).next(".content").slideToggle(500);
+  });
+});
+</script>
+<script>
+function mano(a) {
+	if (navigator.appName=="Netscape") {
+		a.style.cursor=\'pointer\';
+	} else {
+		a.style.cursor=\'hand\';
+	}
+}
+</script>
 
 {assign var='nameCate' value='in'}
 <!-- Block layered navigation module -->
@@ -39,7 +58,7 @@ current_friendly_url = '#{$current_friendly_url}';
 				{if isset($selected_filters) && $n_filters > 0}
 				<div id="enabled_filters">
 					<span class="layered_subtitle" style="float: none;">{l s='Enabled filters:' mod='blocklayered'}</span>
-<label for="clean_all_10">Limpiar filtros <a href="#">x</a> </label> <input type="checkbox" class="checkbox" name="clean_all_10" id="clean_all_10" style="display: none;" /> 					
+<label for="clean_all_10" onMouseOver="mano(this)" class="heading">Limpiar filtros <span id="redX">x</span> </label> <input type="checkbox" class="checkbox" name="clean_all_10" id="clean_all_10" style="display: none;" /> 					
 
 
 
