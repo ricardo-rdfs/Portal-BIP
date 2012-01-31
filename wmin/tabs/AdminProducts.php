@@ -2954,7 +2954,7 @@ class AdminProducts extends AdminTab
 
 								<img onclick="$(this).prev().search();" style="cursor: pointer;" src="../img/admin/add.gif" alt="'.$this->l('Add an accessory').'" title="'.$this->l('Add an accessory').'" />
 
-<span onclick="addAccessory(169);" style="cursor: pointer;"><img src="../img/admin/delete.gif" class="middle" alt="" /></span><br />
+<span onclick="addAccessory("asssssdddd","421");" style="cursor: pointer;"><img src="../img/admin/delete.gif" class="middle" alt="" /></span><br />
 
 								<!--<img onclick="$(this).prev().search();" style="cursor: pointer;" src="../img/admin/add.gif" alt="'.$this->l('Add an accessory').'" title="'.$this->l('Add an accessory').'" />-->
 							</div>
