@@ -86,10 +86,9 @@ if($idConsulta == 2){
 							AND (vfpv.id_feature = 7
 							OR vfpv.id_feature = 16
 							OR vfpv.id_feature = 26
-							OR vfpv.id_feature = 27
 							OR vfpv.id_feature = 31) order by id_feature ";
 				$resulFeatures = Db::getInstance()->ExecuteS($queryFeatures); 
-				if(count($resulFeatures)==5){
+				if(count($resulFeatures)==4){
 					$xml.="<producto>";
 					$xml.="<id_product><![CDATA[".$fila["id_product"]."]]></id_product>\n";
 					$xml.="<name><![CDATA[".$fila["name"]."]]></name>\n";
@@ -98,8 +97,8 @@ if($idConsulta == 2){
 					$xml.="<tiporam><![CDATA[".$resulFeatures[0]["value"]."]]></tiporam>\n";
 					$xml.="<puertovideo><![CDATA[".$resulFeatures[1]["value"]."]]></puertovideo>\n";
 					$xml.="<videoint><![CDATA[".$resulFeatures[2]["value"]."]]></videoint>\n";
-					$xml.="<connector><![CDATA[".$resulFeatures[3]["value"]."]]></connector>\n";
-					$xml.="<tamano><![CDATA[".$resulFeatures[4]["value"]."]]></tamano>\n";
+					$xml.="<connector><![CDATA[LOLO]]></connector>\n";
+					$xml.="<tamano><![CDATA[".$resulFeatures[3]["value"]."]]></tamano>\n";
 					
 					$xml.="<precio><![CDATA[".$fila["precio"]."]]></precio>\n";
 					$xml.="<ptienda><![CDATA[".$fila["tienda"]."]]></ptienda>\n";
@@ -123,39 +122,31 @@ if($idConsulta == 3){
 	$xml="<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>\n";
 	$xml.="<respuesta>\n";
 	
-	if(strlen($_REQUEST["conector"])>0){
-		$query = "	SELECT p.id_product id_product, pl.name name, vfpv24.value connector, vpp.internet precio, vpp.tienda tienda
-					FROM "._DB_PREFIX_."product p, "._DB_PREFIX_."category_product cp, 
-					"._DB_PREFIX_."category c, "._DB_PREFIX_."category_lang cl, "._DB_PREFIX_."lang l, "._DB_PREFIX_."product_lang pl,
-					view_feat_prod_value vfpv24, view_prod_price vpp
-					WHERE p.id_product = cp.id_product
-					AND c.id_category = cp.id_category
-					AND c.id_category =1257
-					AND c.id_category = cl.id_category
-					AND cl.id_lang = l.id_lang
-					AND p.id_product = pl.id_product
-					AND pl.id_lang = l.id_lang
-					AND l.id_lang =3
-					AND vfpv24.id_product = p.id_product
-					AND vfpv24.id_feature = 24
-					AND vfpv24.value = '".mysql_real_escape_string($_REQUEST["conector"])."'
-					AND vpp.id_product = p.id_product ";
-		$result = Db::getInstance()->ExecuteS($query); 
-		if(count($result)>0){
-			foreach($result as $fila){
-				$xml.="<producto>";
-				$xml.="<id_product><![CDATA[".$fila["id_product"]."]]></id_product>\n";
-				$xml.="<name><![CDATA[".$fila["name"]."]]></name>\n";
-				$xml.="<connector><![CDATA[".$fila["connector"]."]]></connector>\n";
-				$xml.="<precio><![CDATA[".$fila["precio"]."]]></precio>\n";
-				$xml.="<ptienda><![CDATA[".$fila["tienda"]."]]></ptienda>\n";
-				$xml.="</producto>";
-			}
-		}else{
-			$xml.="<mensaje><![CDATA[No se encuentran discos duros compatibles]]></mensaje>\n";
+	$query = "	SELECT p.id_product id_product, pl.name name, vpp.internet precio, vpp.tienda tienda
+				FROM "._DB_PREFIX_."product p, "._DB_PREFIX_."category_product cp, 
+				"._DB_PREFIX_."category c, "._DB_PREFIX_."category_lang cl, "._DB_PREFIX_."lang l, "._DB_PREFIX_."product_lang pl,
+				view_prod_price vpp
+				WHERE p.id_product = cp.id_product
+				AND c.id_category = cp.id_category
+				AND c.id_category =1257
+				AND c.id_category = cl.id_category
+				AND cl.id_lang = l.id_lang
+				AND p.id_product = pl.id_product
+				AND pl.id_lang = l.id_lang
+				AND l.id_lang =3
+				AND vpp.id_product = p.id_product ";
+	$result = Db::getInstance()->ExecuteS($query); 
+	if(count($result)>0){
+		foreach($result as $fila){
+			$xml.="<producto>";
+			$xml.="<id_product><![CDATA[".$fila["id_product"]."]]></id_product>\n";
+			$xml.="<name><![CDATA[".$fila["name"]."]]></name>\n";
+			$xml.="<precio><![CDATA[".$fila["precio"]."]]></precio>\n";
+			$xml.="<ptienda><![CDATA[".$fila["tienda"]."]]></ptienda>\n";
+			$xml.="</producto>";
 		}
 	}else{
-		$xml.="<mensaje><![CDATA[No se seleccionó el conector]]></mensaje>\n";
+		$xml.="<mensaje><![CDATA[No se encuentran discos duros compatibles]]></mensaje>\n";
 	}
 	$xml.="</respuesta>\n";
 	header('Content-Type: text/xml');
@@ -180,9 +171,14 @@ if($idConsulta == 4){
 					AND pl.id_lang = l.id_lang
 					AND l.id_lang =3
 					AND vfpv7.id_product = p.id_product
-					AND vfpv7.id_feature = 7
-					AND vfpv7.value = '".mysql_real_escape_string($_REQUEST["tipoRam"])."'
-					AND vpp.id_product = p.id_product ";
+					AND vfpv7.id_feature = 7 
+					AND ( 1 = 1 ";
+					$splitted = explode("/",$_REQUEST["tipoRam"]);
+					for($sp = 0; $sp<sizeof($splitted); $sp++){
+
+						$query .=" OR vfpv7.value = '".mysql_real_escape_string($splitted[$sp])."' ";
+					}
+					$query .=") AND vpp.id_product = p.id_product ";
 		$result = Db::getInstance()->ExecuteS($query); 
 		if(count($result)>0){
 			foreach($result as $fila){
@@ -224,9 +220,15 @@ if($idConsulta == 5){
 					AND pl.id_lang = l.id_lang
 					AND l.id_lang =3
 					AND vfpv31.id_product = p.id_product
-					AND vfpv31.id_feature = 31
-					AND vfpv31.value = '".mysql_real_escape_string($_REQUEST["tamano"])."'
-					AND vfpv91.id_product = p.id_product
+					AND vfpv31.id_feature = 31 ";
+					
+					//SI es ATX sirve tanto para los ATX o mATX
+					if (strlen(stristr($_REQUEST["tamano"],"atx"))>0) {
+						$query.=" AND vfpv31.value like '%".mysql_real_escape_string($_REQUEST["tamano"])."'";
+					}else{
+						$query.=" AND vfpv31.value = '".mysql_real_escape_string($_REQUEST["tamano"])."'";
+					}
+			$query.=" AND vfpv91.id_product = p.id_product
 					AND vfpv91.id_feature = 91
 					AND vfpv91.value = '".mysql_real_escape_string($_REQUEST["incluyeFP"])."'
 					AND vpp.id_product = p.id_product ";

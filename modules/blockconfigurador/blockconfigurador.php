@@ -65,12 +65,11 @@ class BlockConfigurador extends Module
 
 	public function hookLeftColumn($params)
 	{
-		return '<table width="191px"><tr><td align="center"><a href="modules/blockconfigurador/configuradorMain.php"><img height="163" width="155" title="Banner Configurador PC" alt="Banner Configurador PC" src="http://demo.exe.cl/exeBIPdev/modules/blockconfigurador/SpryAssets/banner_configPc_bip_01.jpg" align="top"></a></td></tr></table>';
+		return '<table width="191px"><tr><td align="center"><a href="modules/blockconfigurador/configuradorMain.php"><img height="163" width="155" title="Banner Configurador PC" alt="Banner Configurador PC" src="'.dirname(__FILE__).'../../modules/blockconfigurador/SpryAssets/banner_configPc_bip_01.jpg" align="top"></a></td></tr></table>';
 	}
 
 	private function _clearBlockconfiguradorCache()
 	{
-		$this->_clearCache('blockconfigurador.tpl');
 		Tools::restoreCacheSettings();
 	}
 	

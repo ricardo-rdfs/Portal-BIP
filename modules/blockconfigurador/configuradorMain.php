@@ -13,13 +13,13 @@ echo "
 <script type='text/javascript' src='".__PS_BASE_URI__."themes/ps_bip/js/product.js'></script>
 <link href='".__PS_BASE_URI__."css/jquery.fancybox-1.3.4.css' rel='stylesheet' type='text/css' media='screen' />
 
-<a class='extLinkParlantes' href='".__PS_BASE_URI__."modules/blockconfigurador/categoryConfigurador.php?id_category=1352' id='linkExternoParlantes'></a>
-<a class='extLinkWebcam' href='".__PS_BASE_URI__."modules/blockconfigurador/categoryConfigurador.php?id_category=1353' id='linkExternoWebcam'></a>
-<a class='extLinkMonitor' href='".__PS_BASE_URI__."modules/blockconfigurador/categoryConfigurador.php?id_category=1329' id='linkExternoMonitor'></a>
-<a class='extLinkTeclado' href='".__PS_BASE_URI__."modules/blockconfigurador/categoryConfigurador.php?id_category=1358' id='linkExternoTeclado'></a>
-<a class='extLinkMouse' href='".__PS_BASE_URI__."modules/blockconfigurador/categoryConfigurador.php?id_category=1356' id='linkExternoMouse'></a>
+<a class='extLinkParlantes' href='".__PS_BASE_URI__."modules/blockconfigurador/categorias.php?content_only=1&noredirect=1&id_category=1352' id='linkExternoParlantes'></a>
+<a class='extLinkWebcam' href='".__PS_BASE_URI__."modules/blockconfigurador/categorias.php?content_only=1&noredirect=1&id_category=1353' id='linkExternoWebcam'></a>
+<a class='extLinkMonitor' href='".__PS_BASE_URI__."modules/blockconfigurador/categorias.php?content_only=1&noredirect=1&id_category=1329' id='linkExternoMonitor'></a>
+<a class='extLinkTeclado' href='".__PS_BASE_URI__."modules/blockconfigurador/categorias.php?content_only=1&noredirect=1&id_category=1358' id='linkExternoTeclado'></a>
+<a class='extLinkMouse' href='".__PS_BASE_URI__."modules/blockconfigurador/categorias.php?content_only=1&noredirect=1&id_category=1356' id='linkExternoMouse'></a>
 
-<table><tr><td style='background-color:#FFFFFF;'><iframe id='iframeConfigurador' src='configurador_pc.php' name='ZONE1' width='700'  marginwidth='0' height='960' marginheight='0' scrolling='no' frameborder='0' id='ZONE1' border='0'></iframe></td></tr></table>
+<table><tr><td style='background-color:#FFFFFF;'><iframe id='iframeConfigurador' src='configurador_pc.php' name='ZONE1' width='740'  marginwidth='0' height='960' marginheight='0' scrolling='yes' frameborder='0' id='ZONE1' border='0'></iframe></td></tr></table>
 
 <script type='text/javascript'>
 $(document).ready(function(){

@@ -250,3 +250,13 @@
 	 clear:both !important;
 }
 }
+#right_column {
+    display: none;
+    margin-bottom: 10px;
+    margin-left: 0;
+    margin-right: 10px;
+    margin-top: 10px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    width: 150px;
+}

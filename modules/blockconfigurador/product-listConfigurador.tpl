@@ -1,22 +1,22 @@
-
 {if isset($products)}
 	<!-- Products list -->
-	<ul id="product_list" class="clear" style="width:740px">
+	<ul id="product_list" class="clear">
 	{foreach from=$products item=product name=products}
 		<li class="ajax_block_product {if $smarty.foreach.products.first}first_item{elseif $smarty.foreach.products.last}last_item{/if} {if $smarty.foreach.products.index % 2}alternate_item{else}item{/if} clearfix">
 			<div class="center_block">
-				<a href="{$product.link|escape:'htmlall':'UTF-8'}" class="product_img_link" title="{$product.name|escape:'htmlall':'UTF-8'}"><img src="{$link->getImageLink($product.link_rewrite, $product.id_image, 'home')}" alt="{$product.legend|escape:'htmlall':'UTF-8'}" {if isset($homeSize)} width="{$homeSize.width}" height="{$homeSize.height}"{/if} /></a>
-				<h3>{if isset($product.new) && $product.new == 1}<span class="new">{l s='Nuevo'}</span>{/if}<a href="{$product.link|escape:'htmlall':'UTF-8'}" title="{$product.name|escape:'htmlall':'UTF-8'}">{$product.name|truncate:35:'...'|escape:'htmlall':'UTF-8'}</a></h3>
-				<p class="product_desc"><a href="{$product.link|escape:'htmlall':'UTF-8'}" title="{$product.description_short|truncate:360:'...'|strip_tags:'UTF-8'|escape:'htmlall':'UTF-8'}">{$product.description_short|truncate:360:'...'|strip_tags:'UTF-8'}</a></p>
+				<a href="#" class="product_img_link" title="{$product.name|escape:'htmlall':'UTF-8'}"><img src="{$link->getImageLink($product.link_rewrite, $product.id_image, 'home')}"  alt="{$product.legend|escape:'htmlall':'UTF-8'}" {if isset($homeSize)} width="{$homeSize.width}" height="{$homeSize.height}"{/if} /></a>
+				<h3>{if isset($product.new) && $product.new == 1}<span class="new">{l s='New'}</span>{/if}<a href="#" title="{$product.name|escape:'htmlall':'UTF-8'}">{$product.name|truncate:35:'...'|escape:'htmlall':'UTF-8'}</a></h3>
+				<p class="product_desc">
+C.BIP : {$product["id_product"]}<BR>
+P/N #  {$product.reference} <BR>
+</p>
 				{if isset($prod_features[$product["id_product"]])}
 				<ul class="lista_atributo">
 				{foreach from=$prod_features[$product["id_product"]] item=feature name=i}
 					{if  $smarty.foreach.i.iteration < 5}
-					<li class="lista_atributo"><span>{$feature.name|escape:'htmlall':'UTF-8'}:</span> {$feature.value|escape:'htmlall':'UTF-8'}</li>
+					<li class="lista_atributo">{$feature.value|escape:'htmlall':'UTF-8'}</li>
 					{/if}
 				{/foreach}
-				<li class="lista_atributo">P/N # {$product["reference"]} <span style="color:#D0D3D8;">|</span> C&oacute;digo Bip: {$product["id_product"]}</li>
-
                 </ul>
 				{/if}
 			</div>																				 
@@ -26,10 +26,24 @@
 				{if isset($product.online_only) && $product.online_only}<span class="online_only">{l s='Online only!'}</span>{/if}
 				{if (!$PS_CATALOG_MODE AND ((isset($product.show_price) && $product.show_price) || (isset($product.available_for_order) && $product.available_for_order)))}
 				<div>
-					{if isset($prod_combinations[$product["id_product"]]["Tiendas"]["price"])}<span class="s_precio_tiendas" style="display: inline;">Precio Tienda: {convertPrice price=$prod_combinations[$product["id_product"]]["Tiendas"]["price"]}</span><br />{/if}
-					{if isset($prod_combinations[$product["id_product"]]["Mall"]["price"])}<span class="s_precio_mall" style="display: inline;">Precio Mall: {convertPrice price=$prod_combinations[$product["id_product"]]["Mall"]["price"]}</span><br />{/if}
-					{if isset($product.show_price) && $product.show_price && !isset($restricted_country_mode)}<span class="price" style="display: inline;" id="precio-lista">Precio de Lista: {if !$priceDisplay}{convertPrice price=$product.price}{else}{convertPrice price=$product.price_tax_exc}{/if}</span><br /><span class="price" style="display: inline;" id="precio-internet">Precio M&iacute;nimo Internet:<br /><span class="price-internet-valor"> {if !$priceDisplay}{convertPrice price=($product.price*0.9)}{else}{convertPrice price=$product.price_tax_exc}{/if}</span></span>{/if}
-				<!--	{if isset($product.available_for_order) && $product.available_for_order && !isset($restricted_country_mode)}<span class="availability">{if ($product.allow_oosp || $product.quantity > 0)}{l s='Available'}{elseif (isset($product.quantity_all_versions) && $product.quantity_all_versions > 0)}{l s='Product available with different options'}{else}{l s='Out of stock'}{/if}</span>{/if} -->
+
+{if $product.condition eq 'new'}
+                                        <span class="s_precio_distribuidor" style="display: inline;">Precio Distribuidor: 
+{if $cookie->id_default_group == 2}
+{convertPrice price=$product.price_distribuidor}
+{/if}
+{if $cookie->id_default_group == 3}
+{convertPrice price=$product.price_distribuidor_p}
+{/if}
+</span>
+					<span class="s_precio_tiendas" style="display: inline;">Precio Tienda: {convertPrice price=$product.price_tienda}</span>
+					<span class="s_precio_mall" style="display: inline;">Precio Mall: {convertPrice price=$product.price_mall}</span>
+					<span class="s_precio_internet" style="display: inline;">{if isset($product.show_price) && $product.show_price && !isset($restricted_country_mode)}<span class="price" style="display: inline;" id="precio-lista">Precio Lista: {convertPrice price=$product.price_tienda}</span><br /><span class="price" style="display: inline;" id="precio-internet">Precio M&iacute;nimo Internet:<br /><span class="price-internet-valor"> {convertPrice price=$product.price_internet}</span></span>{/if}</span>
+{/if}	
+{if $product.condition eq 'used'}
+                                        <span style="display: inline;"><span class="price" style="display: inline;" id="precio-internetUS">Cheque 30 Días: {convertPrice price=round(($product.price*100)/90)}</span></span><br>
+{/if}	
+                                        {if isset($product.available_for_order) && $product.available_for_order && !isset($restricted_country_mode)}<span class="availability">{if ($product.allow_oosp || $product.quantity > 0)}Disponible{else}Fuera de Stock{/if} </span> {else} <span class="availability"> Fuera de Stock </span>{/if}
 				</div>
 				<script>changeTab($.cookie('bip_tab'));</script>	
 				{/if}
@@ -46,7 +60,11 @@
 								<input type="hidden" name="id_product_attribute" id="idCombination" value="" />
 							</p>
 
-							
+							<!-- quantity wanted allow_oosp {$allow_oosp} product_quantity {$product->quantity} virtual {$virtual} available {$product->available_for_order} -->
+							<p id="quantity_wanted_p"{if (!$product.$allow_oosp && $product.quantity <= 0) OR !$product.available_for_order OR $PS_CATALOG_MODE} style="display: none;"{/if}>
+								<label>{l s='Cantidad :'}</label>
+								<input type="text" name="qty" id="quantity_wanted" class="text" value="{if isset($quantityBackup)}{$quantityBackup|intval}{else}{if $product.minimal_quantity > 1}{$product.minimal_quantity}{else}1{/if}{/if}" size="2" maxlength="3" {if $product.minimal_quantity > 1}onkeyup="checkMinimalQuantity({$product.minimal_quantity});"{/if} />
+							</p>
 				
 							<!-- minimal quantity wanted -->
 							<p id="minimal_quantity_wanted_p"{if $product.minimal_quantity <= 1 OR !$product.available_for_order OR $PS_CATALOG_MODE} style="display: none;"{/if}>{l s='You must add '}<b id="minimal_quantity_label">{$product->minimal_quantity}</b>{l s=' as a minimum quantity to buy this product.'}</p>
@@ -55,15 +73,25 @@
 								checkMinimalQuantity();
 							</script>
 							{/if}
-                            <p{if (!$product.allow_oosp && $product.quantity <= 0) OR !$product.available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE} style="display: none;"{/if} id="add_to_cart" class="buttons_bottom_block"><input type="button" name="Submit" value="Seleccionar" class="exclusive" onclick="window.parent.document.getElementById('iframeConfigurador').contentWindow.seteandoValores('{addslashes($product.description_short)}', '{$product["id_product"]}', '{if !$priceDisplay}{($product.price*0.9)}{else}{$product.price_tax_exc}{/if}','{if !$priceDisplay}{$product.price}{else}{$product.price_tax_exc}{/if}');" /></p> 
+{if $product.condition eq 'new'}
+							<p{if (!$product.allow_oosp && $product.quantity <= 0) OR !$product.available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE} style="display: none;"{/if} id="add_to_cart" class="buttons_bottom_block"><input type="submit" name="Submit" value="Seleccionar" class="exclusive" onclick="window.parent.document.getElementById('iframeConfigurador').contentWindow.seteandoValores('{$product.name|escape:'quotes':'UTF-8'}', '{$product["id_product"]}', '{if !$priceDisplay}{($product.price*0.9)}{else}{$product.price_tax_exc}{/if}','{if !$priceDisplay}{$product.price}{else}{$product.price_tax_exc}{/if}');"/></p>
+{/if}
+
 						 </form>
 					{else}
-							<span class="exclusive">{l s='Add to cart'}</span>
+							
 					{/if}
 				{/if}
-								
+{if $product.condition eq 'new'}
+{if $product.available_for_order==0}<span class="exclusive">No disponible</span>{/if}
+{/if}
+{if $product.supplier_reference != ''}
+<p class="compare">
+<a href="{$product.link_used|escape:'htmlall':'UTF-8'}"  target="_blank"><img src="../img/alert.png" width="32px" height="32px" ALIGN=MIDDLE />Homologo Usado </a>
+</p>
+{/if}
 			</div>
-			</li>
+		</li>
 	{/foreach}
 	</ul>
 	<!-- /Products list -->

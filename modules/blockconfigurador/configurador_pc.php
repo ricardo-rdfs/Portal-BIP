@@ -216,8 +216,8 @@ function agregarDD(){
 		for(var i=0; i<discoArray.length; i++) {
 			if(discoArray[i][0]==ddSeleccionada ){
 				var nombre =discoArray[i][1];
-				var tienda =(parseInt(discoArray[i][4]));
-				var internet =(parseInt(discoArray[i][3]));
+				var tienda =(parseInt(discoArray[i][3]));
+				var internet =(parseInt(discoArray[i][2]));
 				var codBip = ddSeleccionada;
 				agregarElementoSeleccionado('tablaDD', ddNumeros, nombre, tienda , internet, codBip);
 				
@@ -761,14 +761,13 @@ function respuestaPopulateMemoria(){
 }
 
 
-function populateHD(connector){
+function populateHD(){
 	var ajaxObject = seConnect(5);
 	var url="ajaxResponse.php";
 	var params = "";
 	if (ajaxObject){	
 		try{
 		   params+="?idConsulta=3";
-		   params+="&conector="+connector;
 		   ajaxObject.open("GET", url+params, true);
 		   ajaxObject.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		   ajaxObject.setRequestHeader("Content-length", params.length);
@@ -796,7 +795,6 @@ function respuestaPopulateHD(){
 						var producto = resXml.getElementsByTagName("producto")[i];
 						var id_product =producto.getElementsByTagName("id_product")[0].firstChild.nodeValue;
 						var name = producto.getElementsByTagName("name")[0].firstChild.nodeValue;
-						var connector = producto.getElementsByTagName("connector")[0].firstChild.nodeValue;
 						var precio = producto.getElementsByTagName("precio")[0].firstChild.nodeValue;
 						var ptienda = producto.getElementsByTagName("ptienda")[0].firstChild.nodeValue;
 						document.getElementById("selectHD").options[i+1] = new Option(name,id_product);
@@ -804,9 +802,8 @@ function respuestaPopulateHD(){
 						var discoObj = new Array();
 						discoObj[0]=id_product;
 						discoObj[1]=name;
-						discoObj[2]=connector;
-						discoObj[3]=precio;
-						discoObj[4]=ptienda;
+						discoObj[2]=precio;
+						discoObj[3]=ptienda;
 						discoArray.push(discoObj);
 					}
 				}else{
