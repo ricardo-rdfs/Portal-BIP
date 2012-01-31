@@ -2943,7 +2943,7 @@ class AdminProducts extends AdminTab
 					$categories = array();
 					$j=0;
 					foreach (Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('
-					SELECT ct.id_category,ctl.name
+					SELECT distinct ct.id_category,ctl.name
 					FROM `'._DB_PREFIX_.'category`  ct
 					INNER JOIN '._DB_PREFIX_.'category_lang ctl ON (ct.id_category = ctl.id_category)
 					WHERE ct.active = 1 and ct.id_category>=1000') as $cat){
