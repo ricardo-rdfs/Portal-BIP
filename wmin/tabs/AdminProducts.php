@@ -2945,10 +2945,9 @@ class AdminProducts extends AdminTab
 					SELECT ctl.id_category,ctl.name
 					FROM `'._DB_PREFIX_.'category`  ct
 					INNER JOIN '._DB_PREFIX_.'category_lang ctl ON (ct.id_category = ctl.id_category)
-					WHERE ctl.active = 1 and ctl.id_category>=1000') as $cat){
+					WHERE ct.active = 1 and ctl.id_category>=1000') as $cat){
 						$categories[][0]  = $cat['id_category'];
 						$categories[][1]  = $cat['name'];
-						echo $cat['name'];
 					}
 
 
