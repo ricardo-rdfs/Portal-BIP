@@ -2972,7 +2972,6 @@ class AdminProducts extends AdminTab
 											scroll:false,
 											cacheLength:0,
 											formatItem: function(item) {
-												alert(item[1]+\' - \'+item[0])
 												return item[1]+\' - \'+item[0];
 											}
 										}).result(addAccessory);
