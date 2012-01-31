@@ -3029,7 +3029,7 @@ $(document).ready(function(){
 $(\'#link_'.$SubCat[0].'\').click(function() {
 parent.$(\'#linkExterno_'.$SubCat[0].'\').trigger(\'click\');
 });
-</script>'
+</script>';
 
 }
 echo '
