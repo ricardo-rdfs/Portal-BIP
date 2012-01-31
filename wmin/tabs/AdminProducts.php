@@ -2951,7 +2951,10 @@ class AdminProducts extends AdminTab
 						$categories[$j][0]  = $cat['id_category'];
 						$categories[$j++][1]  = $cat['name'];
 					}
-
+echo "<script type='text/javascript' src='".__PS_BASE_URI__."js/jquery/jquery.fancybox-1.3.4.js'></script>
+<script type='text/javascript' src='".__PS_BASE_URI__."js/jquery/jquery.serialScroll-1.2.2-min.js'></script>
+<script type='text/javascript' src='".__PS_BASE_URI__."themes/ps_bip/js/product.js'></script>
+<link href='".__PS_BASE_URI__."css/jquery.fancybox-1.3.4.css' rel='stylesheet' type='text/css' media='screen' />";
 
 
 					echo '" />
@@ -2970,7 +2973,6 @@ class AdminProducts extends AdminTab
 
 <span onclick="addAccessory(window.click,new Array(\'T de RED ENCORE NE2000 PCI PnP 100MPS FAST ETHERNET PN/ ENL832-TX-RE (ref: ENL832-TX-RE)\',421));" style="cursor: pointer;"><img src="../img/admin/delete.gif" class="middle" alt="" /></span><br />
 
-<a id="linkParlanteExterno" href="#" onclick="setIds(\'inputParlantes\');"> <img height="15" width="17" title="Buscar productos" alt="Buscar productos" src="SpryAssets/magnify.gif" align="top"></a>
 
 <select name="category_acc">
 ';
@@ -2983,8 +2985,33 @@ foreach($categories as $SubCat){
 
 echo '
 </select>
+
+';
+
+echo "<a class='extLinkParlantes' href='".__PS_BASE_URI__."modules/blockconfigurador/categorias.php?content_only=1&noredirect=1&id_category=1352' id='linkExternoParlantes'></a>";
+
+echo '
+
 								<!--<img onclick="$(this).prev().search();" style="cursor: pointer;" src="../img/admin/add.gif" alt="'.$this->l('Add an accessory').'" title="'.$this->l('Add an accessory').'" />-->
 							</div>
+
+
+<script type=\'text/javascript\'>
+$(document).ready(function(){
+    $(".extLinkParlantes").fancybox({
+         \'width\' : 780,
+         \'height\' : 350,
+         \'autoScale\' : false,
+         \'transitionIn\' : \'600\',
+         \'transitionOut\' : \'200\',
+         \'type\' : \'iframe\',
+		 \'title\' 		: \'Parlantes\'
+     });
+});
+</script>
+
+
+
 							<script type="text/javascript">
 								urlToCall = null;
 								/* function autocomplete */
