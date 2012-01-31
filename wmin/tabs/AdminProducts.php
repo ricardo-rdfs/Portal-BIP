@@ -2941,13 +2941,14 @@ class AdminProducts extends AdminTab
 						echo htmlentities($accessory['name'], ENT_COMPAT, 'UTF-8').'¤';
 
 					$categories = array();
+					$j=0;
 					foreach (Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('
-					SELECT ctl.id_category,ctl.name
+					SELECT ct.id_category,ctl.name
 					FROM `'._DB_PREFIX_.'category`  ct
 					INNER JOIN '._DB_PREFIX_.'category_lang ctl ON (ct.id_category = ctl.id_category)
-					WHERE ct.active = 1 and ctl.id_category>=1000') as $cat){
-						$categories[][0]  = $cat['id_category'];
-						$categories[][1]  = $cat['name'];
+					WHERE ct.active = 1 and ct.id_category>=1000') as $cat){
+						$categories[$j][0]  = $cat['id_category'];
+						$categories[$j++][1]  = $cat['name'];
 					}
 
 
