@@ -3022,7 +3022,7 @@ $(document).ready(function(){
          \'transitionIn\' : \'600\',
          \'transitionOut\' : \'200\',
          \'type\' : \'iframe\',
-		 \'title\' 		: encodeURIComponent(\''.$SubCat[1].'\')
+		 \'title\' 		: \''.str_replace('\'', '',$SubCat[1]).'\'
      });
 });
 
