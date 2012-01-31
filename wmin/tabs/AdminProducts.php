@@ -2948,6 +2948,7 @@ class AdminProducts extends AdminTab
 					WHERE ctl.active = 1 and ctl.id_category>=1000') as $cat){
 						$categories[][0]  = $cat['id_category'];
 						$categories[][1]  = $cat['name'];
+						echo $cat['name'];
 					}
 
 
