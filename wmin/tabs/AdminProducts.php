@@ -2976,7 +2976,7 @@ class AdminProducts extends AdminTab
 foreach($categories as $SubCat){
 	echo '<option value="'.$SubCat[0].'">';
 	echo $SubCat[1];
-	echo '</opyion>';
+	echo '</option>';
 }
 
 echo '
