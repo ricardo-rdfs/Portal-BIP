@@ -2954,6 +2954,8 @@ class AdminProducts extends AdminTab
 
 								<img onclick="$(this).prev().search();" style="cursor: pointer;" src="../img/admin/add.gif" alt="'.$this->l('Add an accessory').'" title="'.$this->l('Add an accessory').'" />
 
+<span onclick="addAccessory(array(\'T de RED ENCORE NE2000 PCI PnP 100MPS FAST ETHERNET PN/ ENL832-TX-RE (ref: ENL832-TX-RE)\',421));" style="cursor: pointer;"><img src="../img/admin/delete.gif" class="middle" alt="" /></span><br />
+
 <a id="linkParlanteExterno" href="#" onclick="setIds(\'inputParlantes\');"> <img height="15" width="17" title="Buscar productos" alt="Buscar productos" src="SpryAssets/magnify.gif" align="top"></a>
 
 								<!--<img onclick="$(this).prev().search();" style="cursor: pointer;" src="../img/admin/add.gif" alt="'.$this->l('Add an accessory').'" title="'.$this->l('Add an accessory').'" />-->
