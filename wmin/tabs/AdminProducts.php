@@ -2989,6 +2989,7 @@ echo '
 ';
 
 echo "<a class='extLinkParlantes' href='".__PS_BASE_URI__."modules/blockconfigurador/categorias.php?content_only=1&noredirect=1&id_category=1352' id='linkExternoParlantes'></a>";
+echo ' <a id="linkParlanteExterno" href="#" onclick="setIds(\'inputParlantes\');"> <img height="15" width="17" title="Buscar productos" alt="Buscar productos" src="SpryAssets/magnify.gif" align="top"></a> ';
 
 echo '
 
@@ -3007,6 +3008,10 @@ $(document).ready(function(){
          \'type\' : \'iframe\',
 		 \'title\' 		: \'Parlantes\'
      });
+});
+
+$(\'#linkParlanteExterno\').click(function() {
+parent.$(\'#linkExternoParlantes\').trigger(\'click\');
 });
 </script>
 
