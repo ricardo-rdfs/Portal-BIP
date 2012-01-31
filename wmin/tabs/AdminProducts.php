@@ -2985,7 +2985,7 @@ function setIds(nombreId){
 <span onclick="addAccessory(window.click,new Array(\'T de RED ENCORE NE2000 PCI PnP 100MPS FAST ETHERNET PN/ ENL832-TX-RE (ref: ENL832-TX-RE)\',421));" style="cursor: pointer;"><img src="../img/admin/delete.gif" class="middle" alt="" /></span><br />
 
 
-<select name="category_acc">
+<select name="category_acc" >
 ';
 
 foreach($categories as $SubCat){
@@ -2998,33 +2998,43 @@ echo '
 </select>
 
 ';
+foreach($categories as $SubCat){
+echo "<a class='extLink_".$SubCat[0]."' href='".__PS_BASE_URI__."modules/blockconfigurador/categorias.php?content_only=1&noredirect=1&id_category=".$SubCat[0]."' id='linkExterno_".$SubCat[0]."'></a>";
+echo ' <a id="link_'.$SubCat[0].'" href="#" onclick="setIds(\'input_'.$SubCat[0].'\');"> <img height="15" width="17" title="Buscar productos" alt="Buscar productos" src="SpryAssets/magnify.gif" align="top"></a> ';
+}
 
-echo "<a class='extLinkParlantes' href='".__PS_BASE_URI__."modules/blockconfigurador/categorias.php?content_only=1&noredirect=1&id_category=1352' id='linkExternoParlantes'></a>";
-echo ' <a id="linkParlanteExterno" href="#" onclick="setIds(\'inputParlantes\');"> <img height="15" width="17" title="Buscar productos" alt="Buscar productos" src="SpryAssets/magnify.gif" align="top"></a> ';
+
 
 echo '
 
 								<!--<img onclick="$(this).prev().search();" style="cursor: pointer;" src="../img/admin/add.gif" alt="'.$this->l('Add an accessory').'" title="'.$this->l('Add an accessory').'" />-->
 							</div>
+';
 
+foreach($categories as $SubCat){
 
-<script type=\'text/javascript\'>
+echo '<script type=\'text/javascript\'>
 $(document).ready(function(){
-    $(".extLinkParlantes").fancybox({
+    $(".extLink_'.$SubCat[0].'").fancybox({
          \'width\' : 780,
          \'height\' : 350,
          \'autoScale\' : false,
          \'transitionIn\' : \'600\',
          \'transitionOut\' : \'200\',
          \'type\' : \'iframe\',
-		 \'title\' 		: \'Parlantes\'
+		 \'title\' 		: \''.$SubCat[1].'\'
      });
 });
 
-$(\'#linkParlanteExterno\').click(function() {
-parent.$(\'#linkExternoParlantes\').trigger(\'click\');
+$(\'#link_'.$SubCat[0].'\').click(function() {
+parent.$(\'#linkExterno_'.$SubCat[0].'\').trigger(\'click\');
 });
-</script>
+</script>'
+
+}
+echo '
+
+
 
 
 
