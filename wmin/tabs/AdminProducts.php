@@ -2763,7 +2763,7 @@ function setIds(nombreId){
 	idInputCodigoBip=nombreId+'Code';
 }
 </script>
-"
+";
 							echo "<script type='text/javascript' src='".__PS_BASE_URI__."js/jquery/jquery.fancybox-1.3.4.js'></script>
 <script type='text/javascript' src='".__PS_BASE_URI__."js/jquery/jquery.serialScroll-1.2.2-min.js'></script>
 <script type='text/javascript' src='".__PS_BASE_URI__."themes/ps_bip/js/product.js'></script>
