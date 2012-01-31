@@ -2985,7 +2985,7 @@ function setIds(nombreId){
 <span onclick="addAccessory(window.click,new Array(\'T de RED ENCORE NE2000 PCI PnP 100MPS FAST ETHERNET PN/ ENL832-TX-RE (ref: ENL832-TX-RE)\',421));" style="cursor: pointer;"><img src="../img/admin/delete.gif" class="middle" alt="" /></span><br />
 
 
-<select name="category_acc" onclick="alert(this)">
+<select name="category_acc" onchange="activeButt(this.value)">
 ';
 
 foreach($categories as $SubCat){
@@ -3000,10 +3000,30 @@ echo '
 ';
 foreach($categories as $SubCat){
 echo "<a class='extLink_".$SubCat[0]."' href='".__PS_BASE_URI__."modules/blockconfigurador/categorias.php?content_only=1&noredirect=1&id_category=".$SubCat[0]."' id='linkExterno_".$SubCat[0]."'></a>";
-echo ' <a id="link_'.$SubCat[0].'" href="#" onclick="setIds(\'input_'.$SubCat[0].'\');"> <img height="15" width="17" title="Buscar productos" alt="Buscar productos" src="SpryAssets/magnify.gif" align="top"></a> ';
+echo ' <a style="display: none;" id="link_'.$SubCat[0].'" href="#" onclick="setIds(\'input_'.$SubCat[0].'\');"> <img height="15" width="17" title="Buscar productos" alt="Buscar productos" src="SpryAssets/magnify.gif" align="top"></a> ';
+}
+
+echo "
+
+<script>
+
+function activeButt(valor){
+
+	var id = 'link_'+valor
+    var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+
 }
 
 
+</script>
+
+
+
+";
 
 echo '
 
