@@ -2993,7 +2993,7 @@ echo ' <a style="display: none;" id="link_'.$SubCat[0].'" href="#SSEARCH"> <img 
 }
 echo '
 <select name="category_acc" onchange="activeButt(this.value)">
-<option value="">Seleccionar Ctaegoria</option>
+<option value="">Seleccionar Categoria</option>
 ';
 
 foreach($categories as $SubCat){
