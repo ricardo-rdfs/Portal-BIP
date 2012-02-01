@@ -135,7 +135,7 @@ class CategoryConfiguradorControllerCore extends FrontConfiguradorControllerCore
 				self::$smarty->assign('prod_combinations', $prod_combinations);
 				
 				self::$smarty->assign(array(
-					//'products' => (isset($cat_products) AND $cat_products) ? $cat_products : NULL,
+					'products' => (isset($cat_products) AND $cat_products) ? $cat_products : NULL,
 					'id_category' => (int)($this->category->id),
 					'id_category_parent' => (int)($this->category->id_parent),
 					'return_category_name' => Tools::safeOutput($this->category->name),
