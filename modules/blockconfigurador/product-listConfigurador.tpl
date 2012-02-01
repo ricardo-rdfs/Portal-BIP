@@ -1,3 +1,13 @@
+<script>
+
+function seteandoValores_wmin(name, id){
+
+	window.parent.document.addAccessory(window.click,new Array(name,id));
+
+	window.parent.jQuery.fancybox.close();
+}
+
+</script>
 {if isset($products)}
 	<!-- Products list -->
 	<ul id="product_list" class="clear">
@@ -77,7 +87,7 @@ P/N #  {$product.reference} <BR>
 
 	{if $isAccesories == 1}
 
-							<p{if (!$product.allow_oosp && $product.quantity <= 0) OR !$product.available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE} style="display: none;"{/if} id="add_to_cart" class="buttons_bottom_block"><input type="submit" name="Submit" value="Seleccionar" class="exclusive" onclick="window.parent.document.getElementById('iframeConfigurador').contentWindow.seteandoValores_wmin('{$product.name|escape:'quotes':'UTF-8'}',{$product["id_product"]});"/></p>
+							<p{if (!$product.allow_oosp && $product.quantity <= 0) OR !$product.available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE} style="display: none;"{/if} id="add_to_cart" class="buttons_bottom_block"><input type="submit" name="Submit" value="Seleccionar" class="exclusive" onclick="seteandoValores_wmin('{$product.name|escape:'quotes':'UTF-8'}',{$product["id_product"]});"/></p>
 
 	{else}
 							<p{if (!$product.allow_oosp && $product.quantity <= 0) OR !$product.available_for_order OR (isset($restricted_country_mode) AND $restricted_country_mode) OR $PS_CATALOG_MODE} style="display: none;"{/if} id="add_to_cart" class="buttons_bottom_block"><input type="submit" name="Submit" value="Seleccionar" class="exclusive" onclick="window.parent.document.getElementById('iframeConfigurador').contentWindow.seteandoValores('{$product.name|escape:'quotes':'UTF-8'}', '{$product["id_product"]}', '{if !$priceDisplay}{($product.price*0.9)}{else}{$product.price_tax_exc}{/if}','{if !$priceDisplay}{$product.price}{else}{$product.price_tax_exc}{/if}');"/></p>

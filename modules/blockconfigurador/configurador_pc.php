@@ -294,12 +294,7 @@ function seteandoValores(nombreIframe, codigoBipIframe, precioIframe, precioIfra
 	window.parent.jQuery.fancybox.close();
 	calcularTotal();
 }
-function seteandoValores_wmin(name, id){
 
-	window.parent.document.addAccessory(window.click,new Array(name,id));
-
-	window.parent.jQuery.fancybox.close();
-}
 function changeCheckboxVideo(){
 	removeOptions(document.getElementById('selectTV'));
 	var id_product = document.getElementById('selectTM').value;
