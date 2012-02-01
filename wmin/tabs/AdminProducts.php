@@ -3000,7 +3000,7 @@ echo '
 
 ';
 foreach($categories as $SubCat){
-echo "<a class='extLink_".$SubCat[0]."' href='".__PS_BASE_URI__."modules/blockconfigurador/categorias.php?content_only=1&noredirect=1&id_category=".$SubCat[0]."' id='linkExterno_".$SubCat[0]."'></a>";
+echo "<a class='extLink_".$SubCat[0]."' href='".__PS_BASE_URI__."modules/blockconfigurador_wmin/categorias.php?content_only=1&noredirect=1&id_category=".$SubCat[0]."' id='linkExterno_".$SubCat[0]."'></a>";
 echo ' <a style="display: none;" id="link_'.$SubCat[0].'" href="#"> <img height="15" width="17" title="Buscar productos" alt="Buscar productos" src="SpryAssets/magnify.gif" align="top"></a> ';
 }
 
