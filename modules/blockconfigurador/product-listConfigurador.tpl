@@ -2,7 +2,7 @@
 
 function seteandoValores_wmin(name, id){
 
-	window.parent.document.addAccessory(window.click,new Array(name,id));
+	window.parent.addAccessory(window.click,new Array(name,id));
 
 	window.parent.jQuery.fancybox.close();
 }
