@@ -145,7 +145,7 @@ class CategoriasControllerCore extends FrontController
                                 self::$smarty->assign('prod_combinations_ref', $p_comb_ref);
 
 				self::$smarty->assign(array(
-					'isAccesories' => addslashes($_POST['acces']),
+					'isAccesories' => addslashes($_REQUEST['acces']),
 					'products' => (isset($this->cat_products) AND $this->cat_products) ? $this->cat_products : NULL,
 					'id_category' => (int)($this->category->id),
 					'id_category_parent' => (int)($this->category->id_parent),
