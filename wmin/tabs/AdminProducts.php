@@ -2984,12 +2984,12 @@ function setIds(nombreId){
 								<img onclick="$(this).prev().search();" style="cursor: pointer;" src="../img/admin/add.gif" alt="'.$this->l('Add an accessory').'" title="'.$this->l('Add an accessory').'" />
 								-->
 
-
+<A NAME="SSEARCH">
 <p>
 ';
 foreach($categories as $SubCat){
 echo "<a class='extLink_".$SubCat[0]."' href='".__PS_BASE_URI__."modules/blockconfigurador/categorias.php?acces=1&content_only=1&noredirect=1&id_category=".$SubCat[0]."' id='linkExterno_".$SubCat[0]."'></a>";
-echo ' <a style="display: none;" id="link_'.$SubCat[0].'" href="#"> <img height="15" width="17" title="Buscar productos" alt="Buscar productos" src="../img/admin/add.gif" align="top"></a> ';
+echo ' <a style="display: none;" id="link_'.$SubCat[0].'" href="#SSEARCH"> <img title="Buscar productos" alt="Buscar productos" src="../img/admin/add.gif" align="top"></a> ';
 }
 echo '
 <select name="category_acc" onchange="activeButt(this.value)">
