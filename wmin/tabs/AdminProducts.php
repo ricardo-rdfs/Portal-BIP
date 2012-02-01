@@ -2986,6 +2986,7 @@ function setIds(nombreId){
 
 
 <select name="category_acc" onchange="activeButt(this.value)">
+<option value="">Seleccionar Ctaegoria</option>
 ';
 
 foreach($categories as $SubCat){
@@ -3000,7 +3001,7 @@ echo '
 ';
 foreach($categories as $SubCat){
 echo "<a class='extLink_".$SubCat[0]."' href='".__PS_BASE_URI__."modules/blockconfigurador/categorias.php?content_only=1&noredirect=1&id_category=".$SubCat[0]."' id='linkExterno_".$SubCat[0]."'></a>";
-echo ' <a style="display: none;" id="link_'.$SubCat[0].'" href="#" onclick="setIds(\'input_'.$SubCat[0].'\');"> <img height="15" width="17" title="Buscar productos" alt="Buscar productos" src="SpryAssets/magnify.gif" align="top"></a> ';
+echo ' <a style="display: none;" id="link_'.$SubCat[0].'" href="#" onclick="this.style=\'display: none;\';"> <img height="15" width="17" title="Buscar productos" alt="Buscar productos" src="SpryAssets/magnify.gif" align="top"></a> ';
 }
 
 echo "
