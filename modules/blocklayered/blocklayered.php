@@ -2267,7 +2267,7 @@ OR
                             ' LIMIT '.(((int)Tools::getValue('p', 1) - 1) * $n.','.$n));
      
                         }else{
-                            echo "dddd:::aaaa<br><br>";
+                            echo "vvv:::aaaa<br><br>";
                             
                             $n = (int)Tools::getValue('n', Configuration::get('PS_PRODUCTS_PER_PAGE'));
                             $this->products = Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('
@@ -2282,10 +2282,11 @@ OR
                             LEFT JOIN '._DB_PREFIX_.'image i ON (i.id_product = p.id_product AND i.cover = 1)
                             LEFT JOIN '._DB_PREFIX_.'image_lang il ON (i.id_image = il.id_image AND il.id_lang = '.(int)($cookie->id_lang).')
                             LEFT JOIN '._DB_PREFIX_.'manufacturer m ON (m.id_manufacturer = p.id_manufacturer)
-                            WHERE (p.`active` = 1 AND pl.id_lang = '.(int)$cookie->id_lang.'
+                            LEFT JOIN '._DB_PREFIX_.'product_attribute ppat ON (p.id_product = ppat.id_product)  
+                            LEFT JOIN '._DB_PREFIX_.'product_attribute_combination pcat ON (ppat.id_product_attribute = pcat.id_product_attribute) 
+                            WHERE pcat.id_attribute = 21 and (p.`active` = 1 AND pl.id_lang = '.(int)$cookie->id_lang.'
                             ) AND p.id_product IN ('.implode(',', $productIdList).')'
-                            .' GROUP BY p.id_product ORDER BY '.Tools::getProductsOrder('by', Tools::getValue('orderby'), true).' '.Tools::getProductsOrder('way', Tools::getValue('orderway')).
-                            ' LIMIT '.(((int)Tools::getValue('p', 1) - 1) * $n.','.$n));
+                            .' GROUP BY p.id_product ORDER BY ppat.price desc LIMIT '.(((int)Tools::getValue('p', 1) - 1) * $n.','.$n));
                             
                         }
                         
