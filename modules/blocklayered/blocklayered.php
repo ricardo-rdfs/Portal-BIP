@@ -2287,7 +2287,23 @@ OR
                             WHERE pcat.id_attribute = 21 and (p.`active` = 1 AND pl.id_lang = '.(int)$cookie->id_lang.'
                             ) AND p.id_product IN ('.implode(',', $productIdList).')'
                             .' GROUP BY p.id_product ORDER BY ppat.price desc LIMIT '.(((int)Tools::getValue('p', 1) - 1) * $n.','.$n));
-                            
+                            echo '
+                            SELECT p.reference,p.id_product, p.on_sale, p.out_of_stock, p.available_for_order, p.quantity, p.minimal_quantity, p.id_category_default, p.customizable, p.show_price, p.`weight`,
+                            p.ean13, pl.available_later, pl.description_short, pl.link_rewrite, pl.name, i.id_image, il.legend,  m.name manufacturer_name, p.condition, p.id_manufacturer,
+                            DATEDIFF(p.`date_add`,
+                            DATE_SUB(NOW(), INTERVAL '.(Validate::isUnsignedInt(Configuration::get('PS_NB_DAYS_NEW_PRODUCT')) ? Configuration::get('PS_NB_DAYS_NEW_PRODUCT') : 20).' DAY)) > 0 AS new
+                            FROM `'._DB_PREFIX_.'category_product` cp
+                            LEFT JOIN '._DB_PREFIX_.'category c ON (c.id_category = cp.id_category)
+                            LEFT JOIN `'._DB_PREFIX_.'product` p ON p.`id_product` = cp.`id_product`
+                            LEFT JOIN '._DB_PREFIX_.'product_lang pl ON (pl.id_product = p.id_product)
+                            LEFT JOIN '._DB_PREFIX_.'image i ON (i.id_product = p.id_product AND i.cover = 1)
+                            LEFT JOIN '._DB_PREFIX_.'image_lang il ON (i.id_image = il.id_image AND il.id_lang = '.(int)($cookie->id_lang).')
+                            LEFT JOIN '._DB_PREFIX_.'manufacturer m ON (m.id_manufacturer = p.id_manufacturer)
+                            LEFT JOIN '._DB_PREFIX_.'product_attribute ppat ON (p.id_product = ppat.id_product)  
+                            LEFT JOIN '._DB_PREFIX_.'product_attribute_combination pcat ON (ppat.id_product_attribute = pcat.id_product_attribute) 
+                            WHERE pcat.id_attribute = 21 and (p.`active` = 1 AND pl.id_lang = '.(int)$cookie->id_lang.'
+                            ) AND p.id_product IN ('.implode(',', $productIdList).')'
+                            .' GROUP BY p.id_product ORDER BY ppat.price desc LIMIT '.(((int)Tools::getValue('p', 1) - 1) * $n.','.$n);
                         }
                         
                     }else{
