@@ -2267,7 +2267,7 @@ OR
                             ' LIMIT '.(((int)Tools::getValue('p', 1) - 1) * $n.','.$n));
      
                         }else{
-                            echo "aaaaa:::aaaa<br><br>";
+                            echo "bbbbb:::aaaa<br><br>";
                             
                             $n = (int)Tools::getValue('n', Configuration::get('PS_PRODUCTS_PER_PAGE'));
                             $this->products = Db::getInstance(_PS_USE_SQL_SLAVE_)->ExecuteS('
