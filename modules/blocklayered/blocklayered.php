@@ -2087,13 +2087,13 @@ class BlockLayered extends Module
                     LEFT JOIN '._DB_PREFIX_.'category_lang cl ON p.`id_category_default` = cl.id_category
                     WHERE 1 '.$queryFiltersWhere.' 
                     AND (
-(
-'.$descrypt_reg.'
-) 
-OR 
-(p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
-OR
-(cl.name REGEXP "[[:<:]]'.$whereLikeFilter.'[[:>:]]")
+						(
+						'.$descrypt_reg.'
+						) 
+						OR 
+						(p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
+						OR
+						(cl.name REGEXP "[[:<:]]'.$whereLikeFilter.'[[:>:]]")
 )
                     GROUP BY id_product', false);
 
@@ -2106,14 +2106,14 @@ OR
                     LEFT JOIN '._DB_PREFIX_.'category_lang cl ON p.`id_category_default` = cl.id_category
                     WHERE 1 '.$queryFiltersWhere.'  
                     AND (
-(
-'.$descrypt_reg.'
-) 
-OR 
-(p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
-OR
-(cl.name REGEXP "[[:<:]]'.$whereLikeFilter.'[[:>:]]")
-)   GROUP BY id_product', false);
+						(
+						'.$descrypt_reg.'
+						) 
+						OR 
+						(p.id_product ="'.$whereLikeFilter.'" OR p.reference = "'.$whereLikeFilter.'") 
+						OR
+						(cl.name REGEXP "[[:<:]]'.$whereLikeFilter.'[[:>:]]")
+						)   GROUP BY id_product', false);
     
                 }else{
                     
@@ -2281,10 +2281,12 @@ OR
                             LEFT JOIN '._DB_PREFIX_.'image i ON (i.id_product = p.id_product AND i.cover = 1)
                             LEFT JOIN '._DB_PREFIX_.'image_lang il ON (i.id_image = il.id_image AND il.id_lang = '.(int)($cookie->id_lang).')
                             LEFT JOIN '._DB_PREFIX_.'manufacturer m ON (m.id_manufacturer = p.id_manufacturer)
-                            WHERE (p.`active` = 1 AND pl.id_lang = '.(int)$cookie->id_lang.'
-                            ) AND p.id_product IN ('.implode(',', $productIdList).')'
-                            .' GROUP BY p.id_product ORDER BY '.Tools::getProductsOrder('by', Tools::getValue('orderby'), true).' '.Tools::getProductsOrder('way', Tools::getValue('orderway')).
-                            ' LIMIT '.(((int)Tools::getValue('p', 1) - 1) * $n.','.$n));
+                            LEFT JOIN '._DB_PREFIX_.'product_attribute ppat ON (p.id_product = ppat.id_product)  
+                            LEFT JOIN '._DB_PREFIX_.'product_attribute_combination pcat ON (ppat.id_product_attribute = pcat.id_product_attribute) 
+
+                            WHERE pcat.id_attribute = 21 AND p.`active` = 1 AND  pl.id_lang = '.(int)$cookie->id_lang.'
+                            AND p.id_product IN ('.implode(',', $productIdList).')'
+                            .'  GROUP BY p.id_product ORDER BY ppat.price desc LIMIT '.(((int)Tools::getValue('p', 1) - 1) * $n.','.$n));
                             
                         }
                         
